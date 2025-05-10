@@ -1,0 +1,214 @@
+.homecontainer{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  
+}
+/*================conteneur1====================*/
+.conteneur1{
+    height: 300px;
+    width: 98%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 4rem;
+    background-color: #495E57;
+}
+.presentation{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 1%;
+    
+}
+.img{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+.title{
+    font-family: "Markazi Text";
+    color: #F4CE14;
+    font-size: 4vw;
+}
+#plat{
+    margin-top: 2rem;
+    height: 300px;
+    width: auto;
+    border-radius: 20px;
+}
+#desc{
+    color: white;
+    text-align: left;
+    width: 50%;
+}
+button{
+    background-color: #F4CE14;
+    color: #495E57;
+    font-weight: bold;
+    font-family: "karla";
+    font-size: 18px;
+    padding: 1%;
+    border-radius: 20px;
+    width: fit-content;
+    cursor: pointer;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+}
+button:hover{
+   background-color: #495E57;
+   color: #F4CE14;
+}
+
+/*=====================conteneur2===================*/
+.conteneur2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.head{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+}
+.subtitle{
+    font-family: "Markazi Text";
+    font-size: 4vw;
+    font-weight: bold;
+    color: #495E57;
+}
+.links{
+    width: 98%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    display: none;
+}
+.cat{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 95%;
+}
+.bnts{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 95%;
+}
+.bnts button{
+    height: fit-content !important;
+    font-size: .5rem;
+    width: fit-content;
+    padding: 5px;
+    background-color: lightgrey;
+    color: black;
+    font-weight: bold;
+}
+.special-menu{
+    display: flex;
+    overflow: auto;
+    width: 98%;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+}
+.plus{
+    font-size: 4vw;
+    color: blue;
+    text-decoration: underline;
+}
+
+/*===================== media queries=====================*/
+
+@media screen and (max-width: 992px){
+    .conteneur1{
+        align-items: center;
+        justify-content: center;
+        height: fit-content;
+    }
+
+    #desc{
+        width: 100%;
+        font-size: 3vw;
+    }
+    .title{
+        font-size: 8vw;
+    }
+    .special-menu{
+        justify-content: flex-start;
+        margin-top: 1rem;
+    }
+    .presentation{
+        width: 95%;
+    }
+
+}
+@media screen and (max-width:768px){
+    .img{
+        width: 60%;
+        height: 60%;
+        align-items: center;
+        justify-content: center;
+    }
+    #plat{
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+    } 
+    .conteneur1{
+       width: 100%;
+        height: 300px; 
+    }
+    .presentation{
+        flex-grow: 1;
+    }
+}
+@media screen and (max-width:500px) {
+    .special-menu{
+        flex-direction: column;
+        margin-top: 1rem;
+        
+    }
+   
+  
+    .conteneur2{
+        width: 100%;
+       
+    }
+    .title{
+        font-size: 10vw;
+        width: 90%;
+    }
+   #reserve{
+    font-size: 3vw;
+   }
+   #desc{
+    width: 90%;
+   }
+   .links{
+    display: block;
+   }
+   .bnts{
+        justify-content: center;
+   }
+   .bnts button{
+    margin: 0 1%;
+   }
+   .cat{
+    justify-content: space-between;
+   }
+}

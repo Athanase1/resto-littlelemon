@@ -1,0 +1,209 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.layout{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow-x: hidden;
+    flex-direction: column;
+}
+main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    width: 98%;
+}
+header{
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+}
+footer{
+    margin-top: 1%;
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+    flex-direction: column;
+    background-color: #495E57;
+}
+#logo{
+    max-height: 68px;
+    width: 256px;
+    cursor: pointer;
+    
+}
+.logoAndIcon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+nav{
+    display: flex;
+    flex-direction: column;
+}
+
+footer nav ul li {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    text-wrap: nowrap; 
+}
+footer nav ul li a{
+    margin: 0;
+    color: black;
+    font-weight: bold;
+    text-wrap: nowrap; 
+}
+footer nav ul{
+   padding: 1%;
+}
+.footer-ul{
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 300px;
+}
+.d-flex{
+    display: flex;
+    justify-content: space-between;
+    width: 98%;
+    align-items: center;
+}
+
+.linkshead{
+    width: 98%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.link-title{
+    text-wrap: nowrap;
+    font-size: 1rem;
+}
+ul{
+    display: flex;
+    list-style: none;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+}
+.bi{
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: black;
+    margin: 0 .2rem;
+    display: none;
+}
+.bi-x{
+    font-size: 1.5rem;
+}
+a {
+    margin: 0 1rem;
+    text-decoration: none;
+    color: #495E57;
+    font-weight: bold;
+    text-wrap: nowrap;
+}
+a:hover{
+    border-bottom: 2px solid #495E57;
+    color: gray;
+}
+.bis{
+    display: none;
+}
+.link-cacher{
+    display: block;
+}
+.copydiv{
+    width: 98%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.copydiv img{
+    height: 30px;
+    width: auto;
+    cursor: pointer;
+}
+
+.copy{
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: "Markazi Text";
+}
+@media screen and (max-width:992px){
+    header{
+        flex-direction: column;
+       }
+}
+@media screen and (max-width : 768px) {
+   header{
+    flex-direction: column;
+   }
+    #logo{
+        width: 100px;
+    }
+    .bis{
+        display: block;
+    }
+    .bi{
+        display: block;
+    }
+
+    .logoAndIcon{
+        justify-content: space-between;
+        align-items: flex-start;
+        width: 98%;
+        border-radius: 20px;
+        padding: 1%;
+        align-items: center;
+    }
+
+    .afficher{
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        height: 100vh;
+        justify-content: flex-start;
+        overflow: hidden;
+    }
+    .cacher{
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        justify-content: flex-start;
+        display: none;
+    }
+    .link-cacher{
+        display: none;
+    }
+  .d-flex{
+    flex-direction: column;
+   
+  }
+  .linkshead .bi{
+    font-size: 3vw;
+  }
+  .link-title{
+    font-size: 2vw;
+  }
+  footer nav{
+    width: 98%;
+  }
+}
