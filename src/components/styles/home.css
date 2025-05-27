@@ -124,6 +124,7 @@ button:hover{
     align-items: center;
     justify-content: center;
     margin-top: 2rem;
+    height: fit-content !important;
 }
 .plus{
     font-size: 4vw;
