@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 export default function Header({ onclick, display }) {
-  const navigator = useNavigate();
+  const navigate = useNavigate();
   return (
     <header>
       <div className="logoAndIcon">
@@ -18,11 +18,16 @@ export default function Header({ onclick, display }) {
           alt="Logo"
           id="logo"
           onClick={() => {
-            navigator.navigate("/home");
+            navigate("/");
           }}
         />
         <div className="bis">
-          <i className="bi bi-basket"></i>
+          <i
+            className="bi bi-basket"
+            onClick={() => {
+              navigate("/panier");
+            }}
+          ></i>
         </div>
       </div>
 
@@ -38,11 +43,7 @@ export default function Header({ onclick, display }) {
               À propos
             </Link>
           </li>
-          <li>
-            <Link to="/menu" onClick={onclick}>
-              Menu
-            </Link>
-          </li>
+
           <li>
             <Link to="/reservation" onClick={onclick}>
               Réservation

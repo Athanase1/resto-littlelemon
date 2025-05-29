@@ -22,7 +22,7 @@ header {
   height: fit-content;
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 footer {
@@ -33,11 +33,13 @@ footer {
   flex-direction: column;
   background-color: #495e57;
   padding: 1%;
+  margin-top: 2%;
 }
 #logo {
   max-height: 68px;
   width: 256px;
   cursor: pointer;
+  margin-top: 0.5rem;
 }
 .logoAndIcon {
   display: flex;
@@ -51,19 +53,24 @@ nav {
 }
 .d-flex .footer-ul {
   display: flex;
-  align-items: center;
-  margin-top: 1rem;
-   transition: max-height 0.5s ease-in-out;
+  align-items: flex-start;
+  flex-direction: column;
+  margin: 1rem;
+  transition: max-height 0.5s ease-in-out;
+  width: 98%;
+}
+.spc {
+  flex-direction: row !important;
 }
 
-footer nav ul li {
+.d-flex nav ul li {
   text-decoration: none;
   color: black;
   font-weight: bold;
   text-wrap: nowrap;
-  margin: 0 1rem;
+  margin: 0.5rem 0.5rem;
 }
-footer nav ul li a {
+.d-flex nav ul li a {
   margin: 0;
   color: black;
   font-weight: bold;
@@ -86,7 +93,7 @@ footer nav ul li a {
 }
 .link-title {
   text-wrap: nowrap;
-  font-size: 1rem;
+  font-size: 1rem !important;
   display: none;
 }
 ul {
@@ -95,7 +102,7 @@ ul {
   align-items: center;
   justify-content: center;
   padding: 0;
-
+  display: flex;
 }
 .bi {
   cursor: pointer;
@@ -107,6 +114,10 @@ ul {
 }
 .bi-x {
   font-size: 1.5rem;
+}
+.bi-chevron-up,
+.bi-chevron-down {
+  font-size: 1.5rem !important;
 }
 a {
   margin: 0 1rem;
@@ -146,11 +157,19 @@ a:hover {
 }
 .logos {
   width: 50px;
-  height: 50px;
+  height: 30px;
   border-radius: 20px;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 }
 
 /* Responsive */
+@media screen and (min-width: 769px) and (max-width: 1124px) {
+  header {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
 @media screen and (max-width: 768px) {
   header {
     flex-direction: column;
@@ -195,18 +214,18 @@ a:hover {
 
   .link-cacher {
     display: none;
-     transition: max-height 0.5s ease-in-out;
+    transition: max-height 0.5s ease-in-out;
   }
 
   .footer-ul {
     flex-direction: row;
     width: 100%;
     padding-left: 0;
-     transition: max-height 0.5s ease-in-out;
+    transition: max-height 0.5s ease-in-out;
   }
 
   .footer-ul li {
-    margin:0 0.5rem ;
+    margin: 0 0.5rem;
   }
 
   .d-flex {

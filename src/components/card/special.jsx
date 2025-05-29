@@ -1,7 +1,7 @@
 import "./special.css"
-export default function Special({img,titre,prix,desc}){
+export default function Special({img,titre,prix,desc, onclick}){
     return(
-       <div className="card">
+       <div className="card" onClick={onclick}>
             <img src={img} alt={titre} className="card-img" />
             <div className="card-body">
                 <div className="card-head">

@@ -2,6 +2,13 @@
   display: flex;
   height: auto;
   width: 98%;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.sub-conatainer {
+  display: flex;
+  height: auto;
+  width: 98%;
 }
 .apropos {
   width: 50%;
@@ -30,7 +37,6 @@
   align-items: center;
   position: relative;
   height: auto;
-  margin: 1rem;
 }
 #img1 {
   border-radius: 50%;
@@ -41,6 +47,55 @@
   right: 2px;
   border-radius: 50%;
 }
+.Title {
+  font-family: "Markazi Text";
+  color: black;
+  font-size: 2rem;
+  display: none;
+  margin: 1rem;
+}
+
+.title {
+  font-family: "Markazi Text";
+  color: white;
+  font-size: 2rem;
+}
+.restaurantdetails {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 98%;
+  height: fit-content;
+  margin: 2rem;
+}
+.detail-card {
+  width: 40%;
+  height: auto;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.detail-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.detail-card p {
+  position: absolute;
+  bottom: 0;
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.7); /* Fond noir translucide */
+  color: white; /* Texte bien visible */
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 10px;
+}
+
 .abouthead {
   display: flex;
   align-items: center;
@@ -75,40 +130,97 @@
   .apropos p {
     width: 99%;
   }
+  .sub-conatainer {
+    margin: 1rem;
+  }
+  .abouthead {
+    border-bottom: 2px solid #495e57;
+  }
+
+  .restaurantdetails {
+    justify-content: space-between !important;
+    width: 100%;
+    margin: 0;
+  }
+
+  .detail-card {
+    width: 45%;
+    padding: 0;
+  }
+  .detail-card p {
+    font-size: 16px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+      sans-serif;
+    padding: 5px;
+    align-items: center;
+  }
+  .Title {
+    display: block;
+    border-bottom: 2px solid #495e57;
+  }
 }
 
 @media screen and (max-width: 768px) {
-  .AboutContainer {
+  .sub-conatainer {
     flex-direction: column;
   }
   .apropos {
     width: 100%;
+    margin-bottom: 2rem;
   }
- .apropos p {
-  width: 90%;
-  text-align: left;
-  max-height: 200px;
-  overflow: hidden;
-  transition: max-height 0.5s ease-in-out;
-  padding: 2%;
-  font-size: 3vw;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-    sans-serif;
-}
+  .apropos p {
+    width: 90%;
+    text-align: left;
+    max-height: 3em; /* environ 1 ligne */
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+    font-size: 3vw;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+      sans-serif;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* nombre de lignes */
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+  }
 
+  .apropos p.p-long {
+    max-height: 1000px; /* assez grand pour afficher tout le texte */
+    -webkit-line-clamp: unset;
+  }
 
-.apropos p.p-long {
-  max-height: 1000px; 
-}
+  .restaurantdetails {
+    justify-content: space-between !important;
+    width: 100%;
+    margin: 0;
+  }
+
+  .detail-card {
+    width: 45%;
+    padding: 0;
+  }
+  .detail-card p {
+    font-size: 2vw;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+      sans-serif;
+    padding: 1px;
+    align-items: center;
+  }
+  .Title {
+    display: block;
+    border-bottom: 2px solid #495e57;
+    font-size: 3rem;
+  }
 
   .imgs {
     width: 100%;
-    justify-content: space-around !important;
+    justify-content: space-evenly !important;
   }
   .imgs img {
-    width: 200px !important;
-    height: 200px !important;
+    width: 40% !important;
+    height: auto !important;
     border-radius: 20px !important;
   }
   #img2 {

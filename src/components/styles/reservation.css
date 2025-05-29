@@ -1,0 +1,110 @@
+.Reservation-container{
+   display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column; 
+     width: 100%; 
+}
+.section-form{
+    background-color: #495E57;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 98%;
+    height: fit-content;
+}
+.section-form h1{
+     font-family: "Markazi Text";
+    color: #F4CE14;
+    font-size: 4vw;
+}
+.plats{
+    width: 98%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: fit-content;
+    margin-top: 2rem;
+    height: auto;
+}
+.plats img{
+    width: 300px;
+    height: 300px;
+    border-radius: 20px;
+}
+form{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+     flex-wrap: wrap;
+     overflow: hidden;
+}
+.input-groupe{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+    min-width: 100px;
+    margin: 0 1rem;
+    text-overflow: ellipsis;
+    
+}
+.input-groupe div {
+  display: flex;
+  justify-content: center!important;
+  align-items: center;
+  width: 100%;
+  gap: 0.5rem;
+  padding: .5rem;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  overflow: hidden; /* ✅ Empêche tout débordement */
+}
+.input-groupe h2{
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+    font-size: 1vw;
+}
+
+.bi{
+    display: block;
+}
+.input-groupe div .bi{
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: black;
+    padding: 0;
+    margin: 0;
+}
+.input-groupe input {
+  width: 100px;
+  height: 30px;
+  border: none;
+  font-size: 1rem;
+  background: none;
+}
+
+@media screen and (max-width:768px) {
+    .input-groupe{
+        width: 40%;
+        margin: 1rem;
+    }
+    .input-groupe h2{
+        font-size: 4vw;
+    }
+    .plats img {
+        width: 200px;
+        height: 200px;
+        
+    }
+}
+@media screen and (max-width:500px){
+   .plats img {
+        width: 100px;
+        height: 100px;
+    } 
+}

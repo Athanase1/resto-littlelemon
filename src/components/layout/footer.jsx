@@ -44,7 +44,7 @@ export default function Footer() {
               onClick={togglePayments}
             ></i>
           </div>
-          <ul className={showPayments ? "footer-ul" : "link-cacher"}>
+          <ul className={showPayments ? "footer-ul spc" : "link-cacher"}>
             <li><img src={master} alt="master card logo" className="logos" /></li>
             <li><img src={visa} alt="visa logo" className="logos" /></li>
             <li><img src={Paypal} alt="paypal logo" className="logos" /></li>
