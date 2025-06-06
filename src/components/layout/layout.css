@@ -173,6 +173,7 @@ a:hover {
 @media screen and (max-width: 768px) {
   header {
     flex-direction: column;
+    height: fit-content;
   }
 
   #logo {
@@ -197,19 +198,20 @@ a:hover {
 
   .afficher {
     flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
+    align-items: center !important;
+    width: 100vw !important;
     height: 100vh;
-    justify-content: flex-start;
+    justify-content: center;
     overflow: hidden;
   }
 
   .cacher {
     flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-    justify-content: flex-start;
+    align-items: center !important;
+    width: 100vw;
+    justify-content: center;
     display: none;
+    overflow: hidden;
   }
 
   .link-cacher {
@@ -230,6 +232,12 @@ a:hover {
 
   .d-flex {
     flex-direction: column;
+  }
+  nav ul li a {
+    font-size: 5vw !important;
+  }
+  nav ul li {
+    margin-top: 1.5rem !important;
   }
 
   .linkshead .bi {
