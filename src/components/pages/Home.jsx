@@ -3,6 +3,7 @@ import Photo1 from "../../assets/images/restauranfood.jpg"
 import "../styles/home.css"
 import { special } from "../../assets/data/special"
 import Special from "../card/special"
+import ButtonPlat from "../../assets/outil/buttons/buttonflat"
 export default function Home(){
     const navigate = useNavigate()
     return(
@@ -11,7 +12,6 @@ export default function Home(){
             <div className="presentation">
                 <div>
                 <h1 className="title">Little Lemon</h1>
-                
                 <p id="desc">We are a family owned
                 Mediterranean restaurant,
                 focused on traditional recipes 
@@ -19,9 +19,12 @@ export default function Home(){
                 twist.
                     </p>
                     </div>
-                    <button id="reserve" onClick={()=>{
-                        navigate("/reservation")
-                    }}>Reservez une table</button>
+                    <div className="btn">
+                    <ButtonPlat text="Reservez une table" icon1="bi-bookmark-star" icon2="bi-arrow-right" onClick={() =>{
+                         navigate("/reservation")
+                    }}/>
+                    </div>
+                    
                 </div>
                 <div className="img">
                     <img src={Photo1} alt="image d'un plat" id="plat"/>
@@ -31,9 +34,11 @@ export default function Home(){
            <div className="conteneur2">
             <div className="head">
                 <h1 className="subtitle">This weeks specials!</h1>
-                <button onClick={() =>{
-                    navigate("/order")
-                }}>Online Order</button>
+                <div className="btn">
+                 <ButtonPlat text="Commandez en ligne"  icon2="bi-arrow-right" onClick={() =>{
+                         navigate("/order")
+                    }}/>
+                    </div>
             </div>
             
             <div className="special-menu">

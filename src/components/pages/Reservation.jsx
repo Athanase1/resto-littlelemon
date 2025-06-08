@@ -2,13 +2,24 @@ import Img from "../../assets/images/greekSalad.jpg";
 import Img2 from "../../assets/images/restauranfood.jpg";
 import Img3 from "../../assets/images/lemonDessert.jpg";
 import "../styles/reservation.css";
+import {
+  Personnes,
+  occasions,
+  heuresDisponible,
+  date,
+} from "../../../src/service/heures";
 import { useState } from "react";
+import FormGroupe from "../../assets/outil/form-Input/input-groupe";
+import ButtonPlat from "../../assets/outil/buttons/buttonflat";
+import Input from "../../assets/outil/input/input";
+import Form from "../../assets/outil/form/form";
 export default function Reservation() {
   const [click1, setClick1] = useState(false);
   const [click2, setClick2] = useState(false);
   const [click3, setClick3] = useState(false);
   const [click4, setClick4] = useState(false);
   const [suivant, setSuivant] = useState(false);
+
   function handleClick() {
     setClick1(!click1);
   }
@@ -21,12 +32,12 @@ export default function Reservation() {
   function handleClick4() {
     setClick4(!click4);
   }
-  function handleSuivant(){
-    if(suivant){
-      alert("hello form pret à envoyé")
-      setSuivant(false)
-    } else{
-      setSuivant(true)
+  function handleSuivant() {
+    if (suivant) {
+      alert("hello form pret à envoyé");
+      setSuivant(false);
+    } else {
+      setSuivant(true);
     }
   }
   return (
@@ -34,103 +45,57 @@ export default function Reservation() {
       <div className="section-form">
         <h1>Reservation</h1>
         <form action="">
-          <h1>{!suivant ? "Detail sur la reservation!" : "Info personnelle!"}</h1>
-          {!suivant ? 
-          <div className="section1">
-            <div className="form-groupe">
-              <h2>Date</h2>
-              <div className="input-groupe">
-                <div className="icon">
-                  <i className="bi bi-calendar"></i>
-                </div>
-                <input type="number" name="" id="" />
-                <div className="icon">
-                  <i
-                    onClick={handleClick}
-                    className={
-                      click1 ? "bi bi-chevron-up" : "bi bi-chevron-down"
-                    }
-                  ></i>
-                </div>
+          <h1>
+            {!suivant ? "Detail sur la reservation!" : "Info personnelle!"}
+          </h1>
+          {!suivant ? (
+            <div className="section1">
+              <FormGroupe
+                label="Date"
+                icon="bi bi-calendar"
+                name="date"
+                estClic={click1}
+                handleClick={handleClick}
+                data={date}
+              />
+              <FormGroupe
+                icon="bi bi-people"
+                label="Nombre de personne"
+                estClic={click2}
+                handleClick={handleClick2}
+                data={Personnes}
+              />
+              <FormGroupe
+                icon="bi bi-cup-straw"
+                label="Occasion"
+                estClic={click3}
+                handleClick={handleClick3}
+                data={occasions}
+              />
+              <FormGroupe
+                icon="bi bi-clock"
+                label="Heure"
+                estClic={click4}
+                handleClick={handleClick4}
+                data={heuresDisponible}
+              />
+            </div>
+          ) : (
+            <div className="section2">
+              <Form/>
+              <div className="input-groupe1">
+                <h2>Demande special</h2>
+                <textarea type="text" />
               </div>
             </div>
-            <div className="form-groupe">
-              <h2>Nombre de personne</h2>
-              <div className="input-groupe">
-                <div className="icon">
-                  <i className="bi bi-people"></i>
-                </div>
-                <input type="date" name="" id="" />
-                <div className="icon">
-                  <i
-                    onClick={handleClick2}
-                    className={
-                      click2 ? "bi bi-chevron-up" : "bi bi-chevron-down"
-                    }
-                  ></i>
-                </div>
-              </div>
-            </div>
-            <div className="form-groupe">
-              <h2>Occasion</h2>
-              <div className="input-groupe">
-                <div className="icon">
-                  <i className="bi bi-cup-straw"></i>
-                </div>
-                <input type="text" defaultValue="Anniversaire" name="" id="" />
-                <div className="icon">
-                  <i
-                    onClick={handleClick3}
-                    className={
-                      click3 ? "bi bi-chevron-up" : "bi bi-chevron-down"
-                    }
-                  ></i>
-                </div>
-              </div>
-            </div>
-
-            <div className="form-groupe">
-              <h2>Heure</h2>
-              <div className="input-groupe">
-                <div className="icon">
-                  <i className="bi bi-clock"></i>
-                </div>
-                <input type="text" />
-                <div className="icon">
-                  <i
-                    onClick={handleClick4}
-                    className={
-                      click4 ? "bi bi-chevron-up" : "bi bi-chevron-down"
-                    }
-                  ></i>
-                </div>
-              </div>
-            </div>
+          )}
+          <div className="btn">
+            <ButtonPlat
+              text={suivant ? "Submettre" : "Suivant"}
+              icon2="bi bi-arrow-right"
+              onClick={handleSuivant}
+            />
           </div>
-          :<div className="section2">
-            <div className="input-groupe1">
-              <h2>Nom</h2>
-              <input type="text" />
-            </div>
-            <div className="input-groupe1">
-              <h2>Prenom</h2>
-              <input type="text" />
-            </div>
-            <div className="input-groupe1">
-              <h2>Email</h2>
-              <input type="text" />
-            </div>
-            <div className="input-groupe1">
-              <h2>Numéro</h2>
-              <input type="text" />
-            </div>
-            <div className="input-groupe1">
-              <h2>Demande special</h2>
-              <textarea type="text" />
-            </div>
-          </div>
-          }
-           <button type="submit" onClick={handleSuivant}>{suivant ? "Submettre" : "Suivant"}</button>
           <div className="plats">
             <img src={Img} alt="image plat salad grec" />
             <img src={Img2} alt="img  plat dessert lime" />

@@ -1,0 +1,39 @@
+span{
+    color: black;
+    font-size: .9rem;
+    cursor: pointer;
+}
+span:hover{
+    opacity: 0.6;
+    color: gray;
+}
+.Login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 450px;
+    height: fit-content !important;
+    box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.3), 0 4px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    padding: 1%;
+    transition: all 2ms;
+     background-color: #495E57;
+}
+.Login h1{
+    font-size: 1vw;
+    color: white;
+     margin: 1rem;
+}
+@media screen and (max-width: 500px) {
+    .Login{
+        width: 98% !important;
+        align-items: center;
+       
+    }
+    .Login h1{
+    font-size: 4vw;
+    color: white;
+    margin: 1rem;
+}
+}

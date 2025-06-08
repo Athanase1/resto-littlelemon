@@ -102,7 +102,7 @@
   justify-content: space-between;
   width: 90%;
 }
-.bi {
+.bi-dash-circle, .bi-plus-circle {
   display: none;
 }
 .imgs img {
@@ -227,7 +227,7 @@
     left: auto;
     position: relative;
   }
-  .bi {
+  .bi-dash-circle, .bi-plus-circle{
     display: block;
   }
 }

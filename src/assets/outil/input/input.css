@@ -1,0 +1,26 @@
+.inputContainer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: column;
+  min-width: 300px;
+  text-overflow: ellipsis;
+  margin: 1rem;
+}
+
+.inputContainer input {
+  width: 100%;
+  height: 50px;
+  border: none;
+  font-size: 1rem;
+  text-align: center;
+  background: none;
+  font-weight: bold;
+  border-radius: 10px;
+  box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.3), 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+@media screen and (max-width: 500px) {
+  .inputContainer label {
+    font-size: 4vw;
+  }
+}

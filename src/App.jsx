@@ -4,10 +4,9 @@ import Home from "./components/pages/Home";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import OnlineOrder from "./components/pages/Online Order";
 import Reservation from "./components/pages/Reservation";
-
-import Login from "./components/pages/Login";
 import About from "./components/pages/about";
 import Panier from "./components/pages/Panier";
+import Profile from "./components/pages/Profile";
 
 function App() {
   return (
@@ -17,7 +16,7 @@ function App() {
           <Route index path="/" element={<Home />} />
           <Route path="/order" element={<OnlineOrder />} />
           <Route path="/about" element={<About />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/reservation" element={<Reservation />} />
           <Route path="/panier" element={<Panier />} />
         </Route>

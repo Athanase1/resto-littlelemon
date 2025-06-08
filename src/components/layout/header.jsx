@@ -55,7 +55,7 @@ export default function Header({ onclick, display }) {
             </Link>
           </li>
           <li>
-            <Link to="/login" onClick={onclick}>
+            <Link to="/profile" onClick={onclick}>
               Se connecter
             </Link>
           </li>
