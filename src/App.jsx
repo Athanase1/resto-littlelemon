@@ -7,6 +7,7 @@ import Reservation from "./components/pages/Reservation";
 import About from "./components/pages/about";
 import Panier from "./components/pages/Panier";
 import Profile from "./components/pages/Profile";
+import LaySansHeader from "./components/layout/LayoutSansHeader";
 
 function App() {
   return (
@@ -14,11 +15,15 @@ function App() {
       <Routes>
         <Route path="/" element={<LayOut />}>
           <Route index path="/" element={<Home />} />
-          <Route path="/order" element={<OnlineOrder />} />
           <Route path="/about" element={<About />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/reservation" element={<Reservation />} />
+          
+          
+        </Route>
+        <Route element={<LaySansHeader/>}>
           <Route path="/panier" element={<Panier />} />
+          <Route path="/order" element={<OnlineOrder />} />
+          <Route path="/reservation" element={<Reservation />} />
         </Route>
       </Routes>
     </Router>

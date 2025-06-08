@@ -1,0 +1,95 @@
+.header2-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 98%;
+  height: fit-content;
+  margin-top: 1%;
+  grid-area: "header2-container";
+}
+.header2-container .bi {
+  cursor: pointer;
+  font-size: 2rem;
+}
+.btns {
+  display: flex;
+  width: fit-content;
+  justify-content: space-around;
+  align-items: center;
+}
+.btns button {
+  margin: 0 0.5rem;
+  text-wrap: nowrap;
+  padding: 0;
+}
+.bi-person-fill {
+  display: none;
+}
+.btns button .bi {
+  margin: 0 0.5rem;
+}
+
+.btns button + button {
+  background-color: black;
+  color: white;
+}
+.btns {
+  font-size: 1rem;
+}
+.logo1 {
+    font-size: 3vw;
+    margin-left: 1rem;
+    cursor: pointer;
+}
+.logo1 img{
+    width: 30px;
+    height: auto;
+}
+.logoI{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.logoI .bi-list, .bi-x{
+    display: block;
+}
+.animated-icon {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.animated-icon.bi-list {
+  transform: rotate(0deg);
+  opacity: 1;
+}
+
+.animated-icon.bi-x {
+  transform: rotate(180deg); /* ou 90deg pour effet menu */
+  opacity: 1;
+}
+
+
+@media screen and (max-width: 768px) {
+  .btns button {
+    font-size: 2vw;
+    background-color: black;
+    color: white;
+    padding: 2%;
+  }
+  .btns button + button {
+    display: none;
+  }
+  .header2-container .bi {
+    font-size: 3vw;
+  }
+  .bi-person-fill {
+    display: block;
+  }
+  .btns .bi-arrow-right, .bi-person, .bi-arrow-left{
+    display: none;
+  }
+  .logo1 img{
+    display: none;
+  }
+}

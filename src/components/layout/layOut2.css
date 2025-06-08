@@ -1,0 +1,64 @@
+.layout-sansHeader {
+  display: grid;
+  height: 100vh;
+  width: 100%;
+  grid-template-columns: auto;       /* aside + main */
+  grid-template-rows: auto 1fr;           /* header + content */
+  grid-template-areas:
+    "header2 header2"
+    "main main";
+    overflow-y: hidden;
+    position: relative;
+}
+
+.header2-container {
+  grid-area: header2;
+  background-color: #f4f4f4;
+  padding: 1rem;
+}
+
+aside {
+  grid-area: aside;
+  background-color: #ddd;
+  padding: 1rem;
+  height: 82vh;
+  position: absolute;
+  left: 0;
+  z-index: 100;
+  bottom: 1%;
+  width: 400px;
+   background-color: rgba(0, 0, 0, 0.7);
+   border-bottom-right-radius: 20px; 
+   border-top-right-radius: 20px;
+}
+aside.ouvert{
+    left: 0;
+}
+
+.main {
+  grid-area: main;
+  background-color: #fff;
+  padding: 1rem;
+  overflow-y: auto;
+}
+/* Quand aside est caché */
+.layout-hideAside {
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "header2"
+    "main";
+}
+
+/* Zones */
+.header2-container {
+  grid-area: header2;
+}
+@media screen and (max-width:768px){
+   aside{
+    width: fit-content;
+    justify-content: space-between;
+    height: fit-content;
+    top: 5%;
+   }
+   
+}

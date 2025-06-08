@@ -1,0 +1,16 @@
+.form-container{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center !important;
+    justify-content: center !important;
+}
+@media screen and (max-width:768px) {
+ .form-container{
+    flex-direction: column;
+   } 
+}
+@media screen and (max-width:500px) {
+   
+}

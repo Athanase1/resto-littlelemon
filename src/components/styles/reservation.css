@@ -1,21 +1,13 @@
 .Reservation-container {
   display: flex;
-  align-items: center !important;
+  align-items: flex-start !important;
   justify-content: space-between;
   flex-direction: column;
   width: 100%;
+  height: auto;
 }
-.section-form {
-  background-color: #495e57;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: column;
-  width: fit-content;
-  height: fit-content;
-  border-radius: 20px;
-}
-.section-form h1 {
+
+form h1 {
   font-family: "Markazi Text";
   color: #f4ce14;
   font-size: 4vw;
@@ -38,17 +30,22 @@
 
 form {
   display: flex;
-  width: 90%;
+  width: 100%;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
   overflow: hidden;
+   background-color: #495e57;
+  
 }
 .btn {
   width: 300px;
   height: 50px;
   padding: 1rem;
+}
+.btn button{
+  width: 300px;
 }
 form h1 {
   font-family: "Markazi Text";
@@ -60,13 +57,19 @@ form h1 {
   display: flex;
   justify-content: center;
 }
-.section1,
-.section2 {
+.section1 {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 70%;
+}
+.section2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 80%;
 }
 
 textarea {
@@ -85,12 +88,12 @@ textarea {
     width: 200px !important;
     height: 200px !important;
   }
-  .section-form {
-    width: 98%;
-  }
-  .section1,
-  .section2 {
+
+  .section1 {
     width: 100%;
+  }
+   .section2 {
+    width: 90%;
   }
   form {
     width: 100%;
@@ -102,8 +105,16 @@ textarea {
 
 @media screen and (max-width: 768px) {
   .input-groupe1 {
-    width: 40%;
+    width: 50%;
     margin: 1rem;
+  }
+    form{
+    width: 100%;
+    
+  }
+  .section-form{
+    width: 100%;
+   
   }
   .form-groupe h2 {
     font-size: 4vw;
@@ -112,22 +123,25 @@ textarea {
     width: 150px !important;
     height: 150px !important;
   }
-  .section1,
-  .section2 {
+  .section1{
     width: 98%;
     justify-content: center !important;
     margin: 0 !important;
     padding: 0 !important;
   }
+  .section2 {
+    width: 100% !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+   
+  }
+
 }
 @media screen and (max-width: 500px) {
   .plats img {
     width: 100px !important;
     height: 100px !important;
-  }
-  .section1,
-  .section2 {
-    width: 98%;
   }
   .form-groupe {
     margin-top: 1rem;
@@ -136,4 +150,5 @@ textarea {
   textarea {
     padding: 0;
   }
+
 }

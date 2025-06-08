@@ -42,11 +42,11 @@ export default function Reservation() {
   }
   return (
     <div className="Reservation-container">
-      <div className="section-form">
-        <h1>Reservation</h1>
+       
         <form action="">
+           <h1>Reservation</h1>
           <h1>
-            {!suivant ? "Detail sur la reservation!" : "Info personnelle!"}
+            {!suivant ? "Details sur la reservation" : "Info personnelle"}
           </h1>
           {!suivant ? (
             <div className="section1">
@@ -102,7 +102,6 @@ export default function Reservation() {
             <img src={Img3} alt="plat saumon fumée" />
           </div>
         </form>
-      </div>
     </div>
   );
 }
