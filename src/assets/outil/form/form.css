@@ -6,6 +6,9 @@
     align-items: center !important;
     justify-content: center !important;
 }
+.form-container .inputContainer{
+    margin-bottom: 0.5rem;
+}
 @media screen and (max-width:768px) {
  .form-container{
     flex-direction: column;

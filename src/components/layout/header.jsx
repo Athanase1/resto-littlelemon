@@ -56,7 +56,7 @@ export default function Header({ onclick, display }) {
           </li>
           <li>
             <Link to="/profile" onClick={onclick}>
-              Se connecter
+              Account
             </Link>
           </li>
         </ul>

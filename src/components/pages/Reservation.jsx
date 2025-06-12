@@ -19,18 +19,40 @@ export default function Reservation() {
   const [click3, setClick3] = useState(false);
   const [click4, setClick4] = useState(false);
   const [suivant, setSuivant] = useState(false);
+   const [valueCon, setValueCon] = useState(false);
+   const [valueCon1, setValueCon1] = useState(false);
+   const [valueCon2, setValueCon2] = useState(false);
+   const [valueCon3, setValueCon3] = useState(false);
 
   function handleClick() {
     setClick1(!click1);
+    
+  }  
+  function handleStyles() {
+    setValueCon(!valueCon)
   }
+   function handleStyles1() {
+    setValueCon1(!valueCon1)
+  }
+   function handleStyles2() {
+    setValueCon2(!valueCon2)
+  }
+   function handleStyles3() {
+    setValueCon3(!valueCon3)
+  }
+
   function handleClick2() {
     setClick2(!click2);
+    setValueCon(!valueCon)
+
   }
   function handleClick3() {
     setClick3(!click3);
+    setValueCon(!valueCon)
   }
   function handleClick4() {
     setClick4(!click4);
+    setValueCon(!valueCon)
   }
   function handleSuivant() {
     if (suivant) {
@@ -57,6 +79,8 @@ export default function Reservation() {
                 estClic={click1}
                 handleClick={handleClick}
                 data={date}
+                valueConfimer={valueCon}
+                handleClick2={handleStyles}
               />
               <FormGroupe
                 icon="bi bi-people"
@@ -64,6 +88,8 @@ export default function Reservation() {
                 estClic={click2}
                 handleClick={handleClick2}
                 data={Personnes}
+                handleClick2={handleStyles1}
+                valueConfimer={valueCon1}
               />
               <FormGroupe
                 icon="bi bi-cup-straw"
@@ -71,6 +97,8 @@ export default function Reservation() {
                 estClic={click3}
                 handleClick={handleClick3}
                 data={occasions}
+                handleClick2={handleStyles2}
+                valueConfimer={valueCon2}
               />
               <FormGroupe
                 icon="bi bi-clock"
@@ -78,6 +106,8 @@ export default function Reservation() {
                 estClic={click4}
                 handleClick={handleClick4}
                 data={heuresDisponible}
+                handleClick2={handleStyles3}
+                valueConfimer={valueCon3}
               />
             </div>
           ) : (
@@ -94,6 +124,7 @@ export default function Reservation() {
               text={suivant ? "Submettre" : "Suivant"}
               icon2="bi bi-arrow-right"
               onClick={handleSuivant}
+              type={suivant ? "submit" : ""}
             />
           </div>
           <div className="plats">

@@ -1,19 +1,18 @@
 import { Link, useNavigate } from "react-router-dom";
 import ButtonPlat from "../../assets/outil/buttons/buttonflat";
 import "./aside.css"
-export default function Aside({afficher}){
+export default function Aside({afficher, onClick, handleClick}){
     return(
         <aside className={afficher ? "ouvert" : ""}>
             <div className="asideBtns">
-            <ButtonPlat text="Inscription"/>
-            <ButtonPlat text="Connexion"/>
+            <ButtonPlat text="Inscription" onClick={onClick}/>
+            <ButtonPlat text="Connexion" onClick={onClick}/>
             </div>
             <ul className="Aside-link">
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/about">About</Link></li>
-            <li><Link to="/menu">Menu</Link></li>
-            <li><Link to="/reservation">Reservation</Link></li>
-            <li><Link to="/order">Order Online</Link></li>
+            <li onClick={handleClick}><Link to="/">Home</Link></li>
+            <li onClick={handleClick}><Link to="/about">About</Link></li>
+            <li onClick={handleClick}><Link to="/reservation">Reservation</Link></li>
+            <li onClick={handleClick}><Link to="/order">Order Online</Link></li>
           </ul>
         </aside>
     )

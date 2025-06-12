@@ -8,6 +8,7 @@ import About from "./components/pages/about";
 import Panier from "./components/pages/Panier";
 import Profile from "./components/pages/Profile";
 import LaySansHeader from "./components/layout/LayoutSansHeader";
+import Login from "./components/pages/Login";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/panier" element={<Panier />} />
           <Route path="/order" element={<OnlineOrder />} />
           <Route path="/reservation" element={<Reservation />} />
+          <Route path="/authentification" element={<Login/>}/>
         </Route>
       </Routes>
     </Router>

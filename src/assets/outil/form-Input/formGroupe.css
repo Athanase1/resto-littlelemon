@@ -39,6 +39,9 @@ label {
   text-overflow: ellipsis;
   font-size: 1.5rem;
 }
+.confirmé{
+  background-color: #495e57;
+}
 .liste {
   position: absolute;
   top: calc(100% + 0.5rem); /* 0.5rem d’espacé sous l’input */

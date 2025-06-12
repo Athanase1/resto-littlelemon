@@ -5,16 +5,19 @@ export default function FormGroupe({
   label,
   type,
   handleClick,
+   handleClick2,
   name,
   icon,
   estClic,
   data,
+  valueConfimer,
 }) {
   const [value, setValue] = useState("")
+   
   return (
     <div className="form-groupe">
       <label htmlFor={name}>{label}</label>
-      <div className="input-groupe">
+      <div className={valueConfimer ? "input-groupe confirmé" : "input-groupe"}>
         <div className="icon">
           <i className={icon}></i>
         </div>
@@ -43,6 +46,7 @@ export default function FormGroupe({
               onClick={() => {
                 setValue(item);
                 handleClick();
+                handleClick2()
               }}
             >
               {item}

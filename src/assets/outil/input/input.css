@@ -3,7 +3,7 @@
   align-items: flex-start;
   justify-content: space-between;
   flex-direction: column;
-  min-width: 300px;
+  width: 300px;
   text-overflow: ellipsis;
   margin: 1rem;
 }
@@ -21,7 +21,7 @@
 }
 @media screen and (max-width: 768px) {
   .inputContainer input{
-    width: 100% !important;
+    width: 98% !important;
     height: 30px;
   }
   .inputContainer{
@@ -34,7 +34,7 @@
     font-size: 4vw;
   }
    .inputContainer input{
-    max-width: 100%;
+    max-width: 98%;
     height: 30px;
   }
   .inputContainer{
