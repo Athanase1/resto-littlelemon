@@ -19,40 +19,46 @@ export default function Reservation() {
   const [click3, setClick3] = useState(false);
   const [click4, setClick4] = useState(false);
   const [suivant, setSuivant] = useState(false);
-   const [valueCon, setValueCon] = useState(false);
-   const [valueCon1, setValueCon1] = useState(false);
-   const [valueCon2, setValueCon2] = useState(false);
-   const [valueCon3, setValueCon3] = useState(false);
+   const [valueCon, setValueCon] = useState(null);
+   const [valueCon1, setValueCon1] = useState(null);
+   const [valueCon2, setValueCon2] = useState(null);
+   const [valueCon3, setValueCon3] = useState(null);
 
-  function handleClick() {
+  function handleClick(e) {
     setClick1(!click1);
-    
+    const val = e.target.value
+    setValueCon(val)
   }  
   function handleStyles() {
-    setValueCon(!valueCon)
+    setValueCon(valueCon)
   }
    function handleStyles1() {
-    setValueCon1(!valueCon1)
+    setValueCon1(valueCon1)
   }
    function handleStyles2() {
     setValueCon2(!valueCon2)
   }
    function handleStyles3() {
-    setValueCon3(!valueCon3)
+    setValueCon3(valueCon3)
   }
 
-  function handleClick2() {
+  function handleClick2(e) {
+     const val = e.target.value
+    setValueCon1(val)
     setClick2(!click2);
-    setValueCon(!valueCon)
+   
 
   }
-  function handleClick3() {
+  function handleClick3(e) {
     setClick3(!click3);
-    setValueCon(!valueCon)
+     const val = e.target.value
+    setValueCon2(val)
+   
   }
-  function handleClick4() {
+  function handleClick4(e) {
     setClick4(!click4);
-    setValueCon(!valueCon)
+     const val = e.target.value
+    setValueCon3(val)
   }
   function handleSuivant() {
     if (suivant) {
@@ -64,9 +70,7 @@ export default function Reservation() {
   }
   return (
     <div className="Reservation-container">
-       
         <form action="">
-           <h1>Reservation</h1>
           <h1>
             {!suivant ? "Details sur la reservation" : "Info personnelle"}
           </h1>
@@ -79,7 +83,7 @@ export default function Reservation() {
                 estClic={click1}
                 handleClick={handleClick}
                 data={date}
-                valueConfimer={valueCon}
+                valueConfimer={!!valueCon}
                 handleClick2={handleStyles}
               />
               <FormGroupe
@@ -89,7 +93,7 @@ export default function Reservation() {
                 handleClick={handleClick2}
                 data={Personnes}
                 handleClick2={handleStyles1}
-                valueConfimer={valueCon1}
+                valueConfimer={!!valueCon1}
               />
               <FormGroupe
                 icon="bi bi-cup-straw"
@@ -98,7 +102,7 @@ export default function Reservation() {
                 handleClick={handleClick3}
                 data={occasions}
                 handleClick2={handleStyles2}
-                valueConfimer={valueCon2}
+                valueConfimer={!!valueCon2}
               />
               <FormGroupe
                 icon="bi bi-clock"
@@ -107,7 +111,7 @@ export default function Reservation() {
                 handleClick={handleClick4}
                 data={heuresDisponible}
                 handleClick2={handleStyles3}
-                valueConfimer={valueCon3}
+                valueConfimer={!!valueCon3}
               />
             </div>
           ) : (

@@ -7,9 +7,7 @@
   grid-template-areas:
     "header2 header2"
     "aside main";
-    overflow-y: hidden;
-    justify-items: start !important;
-    align-content: start !important;
+ overflow: hidden;
 }
 
 .header2-container {
@@ -37,7 +35,15 @@ aside.ouvert{
   grid-area: main;
   background-color: #fff;
   padding: 1rem;
-  overflow-y: auto;
+  scroll-behavior: smooth;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 /* Quand aside est caché */
 .layout-hideAside {

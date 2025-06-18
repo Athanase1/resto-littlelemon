@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { UserContext } from "../../store/Context";
 import ButtonPlat from "../../assets/outil/buttons/buttonflat";
-import Login from "./Login";
 import { useNavigate } from "react-router-dom";
+
+
 export default function Profile() {
   const navigate = useNavigate()
-    const [connecte, setConnecte] = useState(false)
+const authCtx = useContext(UserContext)
   return <div>
-    {connecte ? 
-    <p>Hello you</p> : <ButtonPlat text="Connectez-Vous" icon1="bi-person" icon2="bi-arrow-right" onClick={() =>{
+    {!authCtx.connecte ?<ButtonPlat icon1="person"  text="Connectez-vous" icon2="arrow-right" onClick={() =>{
       navigate("/authentification")
-    }}/>
-}
+    }}/> :  <p>{authCtx.user.nom}</p>}
   </div>;
 }

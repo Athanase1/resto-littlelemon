@@ -1,16 +1,17 @@
 .Reservation-container {
   display: flex;
-  align-items: flex-start !important;
-  justify-content: space-between;
+  align-items: center !important;
+  justify-content: center;
   flex-direction: column;
   width: 100%;
-  height: auto;
+  height: 100vh;
+  overflow-y: auto;
 }
 
 form h1 {
   font-family: "Markazi Text";
   color: #f4ce14;
-  font-size: 4vw;
+  font-size: 2vw !important;
 }
 .plats {
   width: 98%;
@@ -25,22 +26,26 @@ form h1 {
   min-width: fit-content;
 }
 .plats img {
-  width: 30%;
-  width: 300px;
-  max-height: 300px !important;
+  width: 200px;
+  height: 200px !important;
   border-radius: 20px;
 }
 
 form {
   display: flex;
-  width: 100%;
+  width: 1000px !important;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
   overflow: hidden;
-   background-color: #495e57;
+  overflow-y: auto;
+  border-radius: 20px;
   transition: all 2s ease;
+  height: fit-content !important;
+  padding-top: 1%;
+  scroll-behavior: smooth;
+ 
 }
 .btn {
   width: 300px;
@@ -52,7 +57,7 @@ form {
 }
 form h1 {
   font-family: "Markazi Text";
-  color: #f4ce14;
+  color: black;
   font-size: 4vw;
   margin-top: 2rem;
   width: 100%;
@@ -60,12 +65,16 @@ form h1 {
   display: flex;
   justify-content: center;
 }
+#rsHeader{
+  border-bottom:  4px solid black;
+}
 .section1 {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   width: 70%;
+  
 }
 .section2 {
   display: flex;
@@ -73,6 +82,7 @@ form h1 {
   align-items: center !important;
   justify-content: center !important;
   width: 80%;
+   
 }
 
 textarea {
