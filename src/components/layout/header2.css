@@ -68,6 +68,9 @@
   transform: rotate(180deg); /* ou 90deg pour effet menu */
   opacity: 1;
 }
+.userName, .bi-person-fill{
+  font-size: 2vw;
+}
 
 
 @media screen and (max-width: 768px) {
@@ -92,4 +95,12 @@
   .logo1 img{
     display: none;
   }
+}
+@media screen and (max-width:500px){
+  .userName{
+    display: none;
+  } 
+    .header2-container .bi {
+    font-size: 3vw;
+  } 
 }

@@ -141,7 +141,6 @@ const navigate = useNavigate()
           setSeconnecte((prev) => !prev);
           setError(null);
         }}
-       
       >
         {seConnecte ? "Pas encore inscrit ? S'inscrire" : "Déjà un compte ? Se connecter"}
       </p>

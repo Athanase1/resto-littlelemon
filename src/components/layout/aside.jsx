@@ -1,12 +1,16 @@
 import { Link, useNavigate } from "react-router-dom";
 import ButtonPlat from "../../assets/outil/buttons/buttonflat";
 import "./aside.css"
+import { useContext } from "react";
+import { UserContext } from "../../store/Context";
 export default function Aside({afficher, onClick, handleClick}){
+    const authCtx = useContext(UserContext)
     return(
         <aside className={afficher ? "ouvert" : ""}>
             <div className="asideBtns">
-            <ButtonPlat text="Inscription" onClick={onClick}/>
-            <ButtonPlat text="Connexion" onClick={onClick}/>
+                {!authCtx.user && <> <ButtonPlat text="Inscription" onClick={onClick}/>
+            <ButtonPlat text="Connexion" onClick={onClick}/></>}
+           
             </div>
             <ul className="Aside-link">
             <li onClick={handleClick}><Link to="/">Home</Link></li>
