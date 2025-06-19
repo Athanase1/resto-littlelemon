@@ -1,8 +1,9 @@
 import Input from "../../assets/outil/input/input";
 import "./userCard.css"
 import logo from "../../assets/images/logovert.png"
+import ButtonPlat from "../../assets/outil/buttons/buttonflat";
 
-export default function UserCard({nom,prenom,email, tel}){
+export default function UserCard({nom,prenom,email, tel, onClick}){
     return(
         <div className="UserCard">
             <div className="photoetNom">
@@ -15,6 +16,7 @@ export default function UserCard({nom,prenom,email, tel}){
                <Input label="Tel" value={tel}/>
                <Input label="Email" value={email}/> 
             </div>
+            <ButtonPlat onClick={onClick} text="Se deconnecter" icon1="bi-box-arrow-left"/>
         </div>
     )
 }

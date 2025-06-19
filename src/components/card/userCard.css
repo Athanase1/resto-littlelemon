@@ -39,6 +39,9 @@
     box-shadow: none;
     border-bottom: 1px solid black;
 }
+.UserCard button{
+    margin: 1rem;
+}
 @media screen and (max-width:500px) {
     .UserCard{
         width: 350px;

@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect, useCallback } from "react";
 import axios from "axios";
+import LoadingScreen from "../components/layout/Loading";
 
 export const UserContext = createContext({
   user: null,
@@ -13,6 +14,7 @@ export const UserContext = createContext({
 export default function UserProvider({ children }) {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
+  const [chargement, setChargement] = useState(true);
 
   // Fonction pour rafraîchir le token
   const refreshToken = useCallback(async () => {
@@ -42,6 +44,7 @@ export default function UserProvider({ children }) {
       setUser(storedUser);
       setToken(accessToken);
     }
+    setTimeout(() => setChargement(false), 1000); // petit délai optionnel
   }, []);
 
   // Setup axios interceptor pour gérer le refresh token automatiquement
@@ -75,56 +78,51 @@ export default function UserProvider({ children }) {
 
   // Fonctions connexion, inscriptionEtConnexion, Deconnexion (idem, mais update token aussi)
 
-const inscriptionEtConnexion = async (nom, prenom, email, tel, password) => {
-  try {
-    const res = await axios.post(
-      "https://project1-backend-2gj1.onrender.com/api/users/inscription",
-      { nom, prenom, email, tel, password },
-      { withCredentials: true }
-    );
-    const { token, utilisateur } = res.data;
+  const inscriptionEtConnexion = async (nom, prenom, email, tel, password) => {
+    try {
+      const res = await axios.post(
+        "https://project1-backend-2gj1.onrender.com/api/users/inscription",
+        { nom, prenom, email, tel, password },
+        { withCredentials: true }
+      );
+      const { token, utilisateur } = res.data;
 
-    localStorage.setItem("accessToken", token);
-    localStorage.setItem("utilisateur", JSON.stringify(utilisateur));
+      localStorage.setItem("accessToken", token);
+      localStorage.setItem("utilisateur", JSON.stringify(utilisateur));
 
-    setUser(utilisateur);
-    setToken(token);
+      setUser(utilisateur);
+      setToken(token);
 
-    return { success: true };
-  } catch (error) {
-    // Extraction du message d'erreur envoyé par le backend
-    const message =
-      error.response?.data?.message || "Erreur inconnue lors de l'inscription";
-    console.error("Erreur d'inscription :", message);
+      if (chargement) return <LoadingScreen text="Inscription en cours" />;
+      return { success: true };
+    } catch (error) {
+      // Extraction du message d'erreur envoyé par le backend
+      const message = "Information invalide"
+      return { success: false, message };
+    }
+  };
 
-    return { success: false, message };
-  }
-};
+  const connexion = async (email, password) => {
+    try {
+      const res = await axios.post(
+        "https://project1-backend-2gj1.onrender.com/api/users/connexion",
+        { email, password },
+        { withCredentials: true }
+      );
+      const { token, utilisateur } = res.data;
 
-const connexion = async (email, password) => {
-  try {
-    const res = await axios.post(
-      "https://project1-backend-2gj1.onrender.com/api/users/connexion",
-      { email, password },
-      { withCredentials: true }
-    );
-    const { token, utilisateur } = res.data;
+      localStorage.setItem("accessToken", token);
+      localStorage.setItem("utilisateur", JSON.stringify(utilisateur));
 
-    localStorage.setItem("accessToken", token);
-    localStorage.setItem("utilisateur", JSON.stringify(utilisateur));
-
-    setUser(utilisateur);
-    setToken(token);
-    return { success: true };
-  } catch (error) {
-    // Extraction du message d'erreur envoyé par le backend
-    const message =
-      error.response?.data?.message || "Erreur inconnue lors de la connexion";
-    console.error("Erreur de connexion :", message);
-
-    return { success: false, message };
-  }
-};
+      setUser(utilisateur);
+      setToken(token);
+      return { success: true };
+    } catch (error) {
+      // Extraction du message d'erreur envoyé par le backend
+      const message = "Information invalide"
+      return { success: false, message };
+    }
+  };
 
   const Deconnexion = () => {
     localStorage.removeItem("accessToken");
@@ -138,10 +136,11 @@ const connexion = async (email, password) => {
     user,
     token,
     connecte: !!token,
-    connexion : connexion,
-    Deconnexion :Deconnexion,
-    inscriptionEtConnexion : inscriptionEtConnexion,
+    connexion: connexion,
+    Deconnexion: Deconnexion,
+    inscriptionEtConnexion: inscriptionEtConnexion,
   };
+  if (chargement) return <LoadingScreen text="Tentative de connexion" />;
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 }

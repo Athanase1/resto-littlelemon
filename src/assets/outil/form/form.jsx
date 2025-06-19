@@ -5,8 +5,9 @@ import "./form.css";
 import { UserContext } from "../../../store/Context";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import LoadingScreen from "../../../components/layout/Loading";
 
-export default function Form({ authen, gestionSub }) {
+export default function Form({ authen }) {
   const [seConnecte, setSeconnecte] = useState(true);
   const [loading, setLoading] = useState(false);
   const [nom, setNom] = useState("");
@@ -14,23 +15,28 @@ export default function Form({ authen, gestionSub }) {
   const [email, setEmail] = useState("");
   const [tel, setTel] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState()
+  const [error, setError] = useState();
 
-
-const authCtx = useContext(UserContext);
-const navigate = useNavigate()
-    const gestionSubmission = async (e) => {
+  const authCtx = useContext(UserContext);
+  const navigate = useNavigate();
+  const gestionSubmission = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-
     try {
       let result;
       if (seConnecte) {
         result = await authCtx.connexion(email, password);
       } else {
-        result = await authCtx.inscriptionEtConnexion(nom, prenom, email, tel, password);
+        result = await authCtx.inscriptionEtConnexion(
+          nom,
+          prenom,
+          email,
+          tel,
+          password
+        );
       }
+      if (loading) return <LoadingScreen text="Connexion en cours patientez" />;
 
       if (result?.success) {
         setError(null);
@@ -54,8 +60,10 @@ const navigate = useNavigate()
 
   return (
     <div className="form-container">
-      {loading && <h1>Chargement en cours...</h1>}
-      {authen && <h1>Connectez Vous !</h1>}
+      <>
+        {authen && <h1>Connectez Vous !</h1>}
+        {error && <h1>{error}</h1>}
+      </>
       {!authen && (
         <>
           <Input
@@ -135,15 +143,17 @@ const navigate = useNavigate()
         onClick={gestionSubmission}
       />
       {authen && (
-       <p
-        className="toggle-auth"
-        onClick={() => {
-          setSeconnecte((prev) => !prev);
-          setError(null);
-        }}
-      >
-        {seConnecte ? "Pas encore inscrit ? S'inscrire" : "Déjà un compte ? Se connecter"}
-      </p>
+        <p
+          className="toggle-auth"
+          onClick={() => {
+            setSeconnecte((prev) => !prev);
+            setError(null);
+          }}
+        >
+          {seConnecte
+            ? "Pas encore inscrit ? S'inscrire"
+            : "Déjà un compte ? Se connecter"}
+        </p>
       )}
     </div>
   );
