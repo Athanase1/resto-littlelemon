@@ -75,7 +75,7 @@ nav {
   color: white;
   font-weight: bold;
   text-wrap: nowrap;
-  font-size: 2vw !important;
+  font-size: .5vw !important;
 }
 
 .d-flex {
@@ -188,6 +188,9 @@ a:hover {
   .bis {
     display: block;
   }
+  .bis .bi{
+    font-size: 5vw;
+  }
 
   .bi-x, .bi-list, .linkshead .bi {
     display: block;
@@ -253,12 +256,15 @@ a:hover {
   }
 
   .linkshead .bi {
-    font-size: 1.5vw !important;
+    font-size: 2.5vw !important;
   }
 
   .link-title {
     font-size: 1vw !important;
     display: block;
+  }
+  .d-flex nav ul li a {
+    font-size: 1.5vw !important;
   }
 
   footer nav {

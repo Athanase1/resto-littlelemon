@@ -26,6 +26,7 @@ export default function Form({ authen }) {
     try {
       let result;
       if (seConnecte) {
+
         result = await authCtx.connexion(email, password);
       } else {
         result = await authCtx.inscriptionEtConnexion(
@@ -36,7 +37,7 @@ export default function Form({ authen }) {
           password
         );
       }
-      if (loading) return <LoadingScreen text="Connexion en cours patientez" />;
+      
 
       if (result?.success) {
         setError(null);
@@ -57,7 +58,7 @@ export default function Form({ authen }) {
       setLoading(false);
     }
   };
-
+  if (loading) return <LoadingScreen text="Connexion en cours patientez" />;
   return (
     <div className="form-container">
       <>

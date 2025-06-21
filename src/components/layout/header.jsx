@@ -23,9 +23,9 @@ export default function Header({ onclick, display }) {
         />
         <div className="bis">
           <i
-            className="bi bi-basket"
+            className="bi bi-person-fill"
             onClick={() => {
-              navigate("/panier");
+              navigate("/profile");
             }}
           ></i>
         </div>

@@ -11,10 +11,10 @@ export default function UserCard({nom,prenom,email, tel, onClick}){
                 <h1>{`${nom} ${prenom}`}</h1>
             </div>
             <div className="inputs">
-                <Input label="Nom" value={nom}/> 
-               <Input label="Prenom" value={prenom}/> 
-               <Input label="Tel" value={tel}/>
-               <Input label="Email" value={email}/> 
+                <input type="text" value={nom}/>
+                <input type="text" value={prenom} />
+                <input type="text"  value={tel}/>
+                <input type="text" value={email}/>
             </div>
             <ButtonPlat onClick={onClick} text="Se deconnecter" icon1="bi-box-arrow-left"/>
         </div>
