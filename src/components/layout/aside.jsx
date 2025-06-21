@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import ButtonPlat from "../../assets/outil/buttons/buttonflat";
 import "./aside.css"
 import { useContext } from "react";
-import { UserContext } from "../../store/Context";
+import { UserContext } from "../../store/AuthContext";
 export default function Aside({afficher, onClick, handleClick}){
     const authCtx = useContext(UserContext)
     return(

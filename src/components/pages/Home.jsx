@@ -4,8 +4,11 @@ import "../styles/home.css"
 import { special } from "../../assets/data/special"
 import Special from "../card/special"
 import ButtonPlat from "../../assets/outil/buttons/buttonflat"
+import { UserContext } from "../../store/AuthContext"
+import { useContext } from "react"
 export default function Home(){
     const navigate = useNavigate()
+    const authCtx = useContext(UserContext)
     return(
         <div className="homecontainer">
            <div className="conteneur1">
@@ -30,7 +33,7 @@ export default function Home(){
                     <img src={Photo1} alt="image d'un plat" id="plat"/>
                 </div>
            </div>
-
+                    {authCtx.user && <h1> Bienvenue {authCtx.user.prenom} !</h1>}
            <div className="conteneur2">
             <div className="head">
                 <h1 className="subtitle">This weeks specials!</h1>

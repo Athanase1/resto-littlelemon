@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../store/Context";
+import { UserContext } from "../../store/AuthContext";
 import ButtonPlat from "../../assets/outil/buttons/buttonflat";
 import { useNavigate } from "react-router-dom";
 import UserCard from "../card/userCard";

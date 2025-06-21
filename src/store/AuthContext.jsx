@@ -119,7 +119,7 @@ export default function UserProvider({ children }) {
       return { success: true };
     } catch (error) {
       // Extraction du message d'erreur envoyé par le backend
-      const message = "Information invalide"
+      const message = "info invalide"
       return { success: false, message };
     }
   };

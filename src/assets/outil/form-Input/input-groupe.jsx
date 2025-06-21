@@ -11,6 +11,7 @@ export default function FormGroupe({
   estClic,
   data,
   valueConfimer,
+  value,
 }) {
   const [value, setValue] = useState("")
    
@@ -28,6 +29,7 @@ export default function FormGroupe({
           id={name}
           value={value}
           readOnly
+          
         />
 
         <div className="icon">

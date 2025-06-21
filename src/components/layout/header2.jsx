@@ -5,7 +5,7 @@ import Logo from "../../assets/images/logovert.png";
 import "./header2.css";
 import ButtonPlat from "../../assets/outil/buttons/buttonflat";
 import { useContext } from "react";
-import { UserContext } from "../../store/Context";
+import { UserContext } from "../../store/AuthContext";
 export default function Header2({ handleClick, click }) {
   const navigate = useNavigate();
   const authCtx = useContext(UserContext)

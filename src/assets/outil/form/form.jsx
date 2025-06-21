@@ -2,7 +2,7 @@ import { useState } from "react";
 import ButtonPlat from "../buttons/buttonflat";
 import Input from "../input/input";
 import "./form.css";
-import { UserContext } from "../../../store/Context";
+import { UserContext } from "../../../store/AuthContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import LoadingScreen from "../../../components/layout/Loading";
