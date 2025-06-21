@@ -13,7 +13,7 @@ export default function FormGroupe({
   valueConfimer,
   value,
 }) {
-  const [value, setValue] = useState("")
+ 
    
   return (
     <div className="form-groupe">
