@@ -5,13 +5,13 @@ export const heuresDisponible = [
       "21:00",
 ]
 export const Personnes = [
-    "2 personnes",
-    "3 personnes",
-    "4 personnes",
-    "5 personnes",
-    "6 personnes",
-    "7 personnes",
-    "8 personnes",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
 ]
 export const occasions = [
     "Autres",

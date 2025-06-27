@@ -7,6 +7,8 @@
 }
 .icon .bi {
   display: block;
+  color: white;
+  font-size: 2vw;
 }
 .input-groupe {
   width: 300px;
@@ -23,11 +25,11 @@
   width: 70%;
   height: 30px;
   font-weight: bold;
-  color: black;
+  color: white;
   text-align: center;
   text-transform: uppercase;
   background: none;
-  font-size: 1rem;
+  font-size: 1vw;
   text-overflow: ellipsis;
 }
 .icon {
@@ -39,28 +41,10 @@ label {
   text-overflow: ellipsis;
   font-size: 1.5rem;
 }
-.confirmé{
+.click{
   background-color: #495e57;
 }
-.liste {
-  position: absolute;
-  top: calc(100% + 0.5rem); /* 0.5rem d’espacé sous l’input */
-  left: 50%;
-  transform: translateX(-50%);
 
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* prends la largeur du contenu ou du parent */
-  z-index: 100; /* au-dessus du reste */
-  background-color: #fff; /* fond blanc pour contraster */
-  border-radius: 8px;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
-  padding: 0.5rem 0;
-  width: 90%;
-}
-.cacherListe {
-  display: none;
-}
 
 .liste li {
   list-style: none;
@@ -103,4 +87,11 @@ label {
   .input-groupe {
     min-width: 98%;
   }
+  .icon .bi {
+  color: white;
+  font-size: 4vw !important;
+}
+.input-groupe input{
+  font-size: 3vw;
+}
 }

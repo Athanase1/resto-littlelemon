@@ -8,22 +8,51 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  flex-direction: column;
+  flex-direction: column; 
+  scroll-behavior: smooth;
+  padding-top: 5rem;
+ 
 }
 .res-container form{
   display: flex;
+  position: relative;
   justify-content: center;
-  width: 100%;
-  flex-wrap: wrap;
+  width: 670px !important;
+  flex-direction: column;
   height: fit-content;
   width: auto;
-   background-color: rgba(0, 0, 0, 0.7); /* Fond noir translucide */
-   border-radius: 20px;
-   padding: 1rem;
+   padding: 1rem; background-color: rgba(0, 0, 0, 0.7); /* Fond noir translucide */
+   border-radius: 20px; 
 }
-.res-container form button{
+.champs1, .champs2{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.res-container  button{
   background-color: black;
   color: white;
+  height: fit-content !important;
+  margin: 1rem;
+}
+.liste {
+  position: absolute;
+  top: calc(10% + 0.5rem); /* 0.5rem d’espacé sous l’input */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* prends la largeur du contenu ou du parent */
+  z-index: 100; /* au-dessus du reste */
+  background-color: #fff; /* fond blanc pour contraster */
+  border-radius: 8px;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 0;
+  width: fit-content;
+}
+.cacherListe {
+  display: none;
 }
 
 .champs1 label{
@@ -51,4 +80,25 @@
   color: white;
   font-size: 3vw;
 }
+.res-container form{
+  width: 100%;
+}
+.champs1,.champs2{
+  flex-direction: column !important;
+}
+}
+@media screen and (max-width:500px) {
+  .plats img{
+    width: 100px !important;
+    height: 100px !important;
+  }
+  .res-container{
+    background: none;
+  }
+  .plats{
+    height: fit-content;
+  }
+  .res-container form{
+    background-color: #495E57;
+  }
 }

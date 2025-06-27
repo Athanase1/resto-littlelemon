@@ -2,17 +2,16 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: fit-content;
-  height: fit-content;
+  width: fit-content !important;
+  height: fit-content !important;
    background-color: #F4CE14;
     color: #495E57;
     font-weight: bold;
     font-family: "karla";
     font-size: 1rem;
-    padding: 2%;
+    padding: 1%;
     border-radius: 20px;
       cursor: pointer;
-      
 }
 .btnContainer:hover{
    background-color: #495E57;

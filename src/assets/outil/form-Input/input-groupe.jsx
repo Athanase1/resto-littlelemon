@@ -14,9 +14,9 @@ export default function FormGroupe({
   value,
 }) {
  
-   
+   const [click, setClick] = useState(null)
   return (
-    <div className="form-groupe">
+    <div className={click ? "form-groupe click": "form-groupe"}>
       <label htmlFor={name}>{label}</label>
       <div className={valueConfimer ? "input-groupe confirmé" : "input-groupe"}>
         <div className="icon">
@@ -29,7 +29,6 @@ export default function FormGroupe({
           id={name}
           value={value}
           readOnly
-          
         />
 
         <div className="icon">
@@ -40,22 +39,7 @@ export default function FormGroupe({
         </div>
       </div>
 
-      {data && data.length > 0 && (
-        <div className={estClic ? "liste" : "cacherListe"}>
-          {data.map((item, index) => (
-            <li
-              key={index}
-              onClick={() => {
-                setValue(item);
-                handleClick();
-                handleClick2()
-              }}
-            >
-              {item}
-            </li>
-          ))}
-        </div>
-      )}
+     
     </div>
   );
 }
