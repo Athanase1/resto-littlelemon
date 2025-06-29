@@ -35,28 +35,28 @@ export default function Header({ onclick, display }) {
         <ul className={display ? "afficher" : "cacher"}>
           <li>
             <Link to="/" onClick={onclick}>
-              Accueil
+              Accueil <i className="bi bi-arrow-right"></i>
             </Link>
           </li>
           <li>
             <Link to="/about" onClick={onclick}>
-              À propos
+              À propos <i className="bi bi-arrow-right"></i>
             </Link>
           </li>
 
           <li>
             <Link to="/reservation" onClick={onclick}>
-              Réservation
+              Réservation <i className="bi bi-arrow-right"></i>
             </Link>
           </li>
           <li>
             <Link to="/order" onClick={onclick}>
-              Commande en ligne
+              Notre menu <i className="bi bi-arrow-right"></i>
             </Link>
           </li>
           <li>
             <Link to="/profile" onClick={onclick}>
-              Account
+              Account <i className="bi bi-arrow-right"></i>
             </Link>
           </li>
         </ul>

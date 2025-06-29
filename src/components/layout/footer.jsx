@@ -27,11 +27,21 @@ export default function Footer() {
             ></i>
           </div>
           <ul className={showLinks ? "footer-ul" : "link-cacher"}>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/about">About</Link></li>
-            <li><Link to="/reservation">Reservation</Link></li>
-            <li><Link to="/order">Order Online</Link></li>
-            <li><Link to="/login">Login</Link></li>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/reservation">Reservation</Link>
+            </li>
+            <li>
+              <Link to="/order">Order Online</Link>
+            </li>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
           </ul>
         </nav>
 
@@ -39,24 +49,28 @@ export default function Footer() {
           <div className="linkshead">
             <h1 className="link-title">Modes de paiement acceptés</h1>
             <i
-              className={showPayments ? "bi bi-chevron-up" : "bi bi-chevron-down"}
+              className={
+                showPayments ? "bi bi-chevron-up" : "bi bi-chevron-down"
+              }
               onClick={togglePayments}
             ></i>
           </div>
           <ul className={showPayments ? "footer-ul spc" : "link-cacher"}>
-            <li><img src={master} alt="master card logo" className="logos" /></li>
-            <li><img src={visa} alt="visa logo" className="logos" /></li>
-            <li><img src={Paypal} alt="paypal logo" className="logos" /></li>
+            <li>
+              <img src={master} alt="master card logo" className="logos" />
+            </li>
+            <li>
+              <img src={visa} alt="visa logo" className="logos" />
+            </li>
+            <li>
+              <img src={Paypal} alt="paypal logo" className="logos" />
+            </li>
           </ul>
         </nav>
       </div>
 
       <div className="copydiv">
-        <img
-          src={logo}
-          alt="Logo little lemon"
-          onClick={() => navigate("/")}
-        />
+        <img src={logo} alt="Logo little lemon" onClick={() => navigate("/")} />
         <p className="copy">
           Little Lemon &copy; {currentYear} — Tous droits réservés
         </p>

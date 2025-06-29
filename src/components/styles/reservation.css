@@ -1,4 +1,4 @@
-.res-container{
+.res-container {
   height: 100%;
   width: 100%;
   display: flex;
@@ -8,12 +8,12 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  flex-direction: column; 
+  flex-direction: column;
   scroll-behavior: smooth;
   padding-top: 5rem;
- 
+  position: relative;
 }
-.res-container form{
+.res-container form {
   display: flex;
   position: relative;
   justify-content: center;
@@ -21,16 +21,19 @@
   flex-direction: column;
   height: fit-content;
   width: auto;
-   padding: 1rem; background-color: rgba(0, 0, 0, 0.7); /* Fond noir translucide */
-   border-radius: 20px; 
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.7); /* Fond noir translucide */
+  border-radius: 20px;
+  backdrop-filter: blur(2px);
 }
-.champs1, .champs2{
+.champs1,
+.champs2 {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   justify-content: center;
 }
-.res-container  button{
+.res-container button {
   background-color: black;
   color: white;
   height: fit-content !important;
@@ -55,14 +58,14 @@
   display: none;
 }
 
-.champs1 label{
+.champs1 label {
   color: white;
   font-size: 1vw;
 }
-.champs2 .form-container{
- background: none !important;
+.champs2 .form-container {
+  background: none !important;
 }
-.plats{
+.plats {
   display: flex;
   align-items: center;
   width: 100%;
@@ -70,35 +73,54 @@
   justify-content: space-around;
   margin-top: 1rem;
 }
-.plats img{
+.plats img {
   width: 30%;
   height: 100%;
   border-radius: 10px;
 }
-@media screen and (max-width:768px) {
-  .champs1 label{
-  color: white;
-  font-size: 3vw;
+  .conf {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* centre parfaitement horizontalement et verticalement */
+  z-index: 1000;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.res-container form{
-  width: 100%;
+
+@media screen and (max-width: 768px) {
+  .champs1 label {
+    color: white;
+    font-size: 3vw;
+  }
+  .res-container form {
+    width: 100%;
+  }
+  .champs1 {
+    margin-top: 4rem;
+  }
+  .champs1,
+  .champs2 {
+    flex-direction: column !important;
+  }
 }
-.champs1,.champs2{
-  flex-direction: column !important;
-}
-}
-@media screen and (max-width:500px) {
-  .plats img{
+@media screen and (max-width: 500px) {
+  .plats img {
     width: 100px !important;
     height: 100px !important;
   }
-  .res-container{
+  .res-container {
     background: none;
   }
-  .plats{
+  .plats {
     height: fit-content;
   }
-  .res-container form{
-    background-color: #495E57;
+
+  .res-container form {
+    background-color: white;
   }
 }

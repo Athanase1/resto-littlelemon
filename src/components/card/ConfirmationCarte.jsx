@@ -1,6 +1,6 @@
 import ButtonPlat from "../../assets/outil/buttons/buttonflat";
 import "./Confirmation.css";
-export default function ConfirmationCarte({ nom, prenom, details, tel, onClick, onClick2 }) {
+export default function ConfirmationCarte({ nom, prenom, details, tel, onClick, onClick2 , chargement}) {
   return (
     <div className="Confirmation">
         
@@ -30,7 +30,7 @@ export default function ConfirmationCarte({ nom, prenom, details, tel, onClick, 
         </div>
       </div>
     <div className="buttons">
-      <ButtonPlat icon2="bi-check-circle" text="Reservez" onClick={onClick}/>
+      <ButtonPlat disabled={chargement} icon2="bi-check-circle" text={chargement ? "Reservation...":"reserver"} onClick={onClick}/>
       <ButtonPlat icon2="bi-pencil-square" text="Modifier" onClick={onClick2} />
       </div>
     </div>

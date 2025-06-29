@@ -1,5 +1,5 @@
 import "../styles/home.css"
-export default function OnlineOrder(){
+export default function Menu(){
     return(
         <div className="links">
         <div className="cat">

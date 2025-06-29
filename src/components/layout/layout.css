@@ -55,7 +55,6 @@ nav {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-  margin: 1rem;
   transition: max-height 0.5s ease-in-out;
   width: 98%;
 }
@@ -75,7 +74,7 @@ nav {
   color: white;
   font-weight: bold;
   text-wrap: nowrap;
-  font-size: .5vw !important;
+  font-size: 0.5vw !important;
 }
 
 .d-flex {
@@ -87,17 +86,19 @@ nav {
 }
 
 .linkshead {
-  width: 98%;
+  max-width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid gray;
+  height: fit-content;
+  padding: 1vh;
 }
 .link-title {
   text-wrap: nowrap;
   font-size: 2vw !important;
   display: none;
   color: white;
-
 }
 ul {
   list-style: none;
@@ -107,7 +108,8 @@ ul {
   padding: 0;
   display: flex;
 }
-.bi-x, .bi-list {
+.bi-x,
+.bi-list {
   cursor: pointer;
   font-size: 1.5rem;
   font-weight: bold;
@@ -115,7 +117,7 @@ ul {
   margin: 0 0.2rem;
   display: none;
 }
-.linkshead .bi{
+.linkshead .bi {
   display: none;
 }
 
@@ -188,14 +190,15 @@ a:hover {
   .bis {
     display: block;
   }
-  .bis .bi{
+  .bis .bi {
     font-size: 5vw;
   }
 
-  .bi-x, .bi-list, .linkshead .bi {
+  .bi-x,
+  .bi-list,
+  .linkshead .bi {
     display: block;
   }
-
 
   .logoAndIcon {
     justify-content: space-between;
@@ -207,11 +210,14 @@ a:hover {
 
   .afficher {
     flex-direction: column;
-    align-items: center !important;
+    align-items: flex-start !important;
     width: 100vw !important;
     height: 100vh;
-    justify-content: center;
-    overflow: hidden;
+    justify-content: flex-start;
+    overflow: hidden !important;
+  }
+  .afficher li {
+    margin-top: 2rem;
   }
 
   .cacher {
@@ -235,13 +241,11 @@ a:hover {
     transition: max-height 0.5s ease-in-out;
   }
 
-  .footer-ul li {
-    margin: 0 0.5rem;
+  .footer-ul li a {
+    font-size: 0.5vw !important;
+    color: gray !important;
   }
-  .footer-ul li a{
-    font-size: 1vw !important;
-  }
-    .link-cacher  li a{
+  .link-cacher li a {
     font-size: 1vw !important;
   }
 
@@ -251,20 +255,17 @@ a:hover {
   nav ul li a {
     font-size: 5vw !important;
   }
-  nav ul li {
-    margin-top: 1.5rem !important;
-  }
 
   .linkshead .bi {
     font-size: 2.5vw !important;
   }
 
   .link-title {
-    font-size: 1vw !important;
+    font-size: 2vw !important;
     display: block;
   }
   .d-flex nav ul li a {
-    font-size: 1.5vw !important;
+    font-size: 1vw !important;
   }
 
   footer nav {

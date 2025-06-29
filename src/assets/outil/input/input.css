@@ -21,8 +21,13 @@
   box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.3), 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-.inputContainer input:focus{
+
+.error{
   border: 2px solid red;
+}
+label > span{
+  color: red;
+  font-size: .5vw;
 }
 .inputContainer label{
   color: white;
@@ -35,6 +40,10 @@
   .inputContainer{
     margin: 0;
   }
+  label > span{
+  color: red;
+  font-size: 1.5vw;
+}
 }
 
 @media screen and (max-width: 500px) {
