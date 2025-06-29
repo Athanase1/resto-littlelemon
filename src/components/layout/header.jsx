@@ -50,7 +50,7 @@ export default function Header({ onclick, display }) {
             </Link>
           </li>
           <li>
-            <Link to="/order" onClick={onclick}>
+            <Link to="/menu" onClick={onclick}>
               Notre menu <i className="bi bi-arrow-right"></i>
             </Link>
           </li>
