@@ -19,7 +19,7 @@ export default function LaySansHeader() {
       }} handleClick={() =>{
         setAfficheaside(!afficheAside)
       }}/>}
-      <main className="main">
+      <main>
         <Outlet />
       </main>
     </div>

@@ -3,14 +3,14 @@
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between !important;
   background-image: url("../../assets/images/MarioandAdrianb.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   flex-direction: column;
   scroll-behavior: smooth;
-  padding-top: 5rem;
+
   position: relative;
   max-width: 100%;
   overflow-x: hidden;
@@ -21,11 +21,10 @@
   display: flex;
   position: relative;
   justify-content: center;
-  width: 670px !important;
+  max-width: 678px !important;
   flex-direction: column;
   height: fit-content;
-  width: auto;
-  max-width: 100%;
+  width: 100%;
   padding: 1rem;
   background-color: rgba(0, 0, 0, 0.7); /* Fond noir translucide */
   border-radius: 20px;
@@ -38,7 +37,7 @@
   flex-wrap: wrap;
   justify-content: center;
   max-width: 100%;
-  overflow: hidden;
+ 
 }
 .res-container button {
   background-color: black;

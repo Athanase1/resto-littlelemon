@@ -1,34 +1,32 @@
 .layout-sansHeader {
   display: grid;
-  height: 100vh;
-  width: 100vw;
-  grid-template-columns: auto 1fr;       /* aside + main */
-  grid-template-rows: auto 1fr;           /* header + content */
+  min-height: 100vh;
+  width: 100%;
+  grid-template-columns: auto 1fr; /* aside + main */
+  grid-template-rows: auto 1fr; /* header + content */
   grid-template-areas:
     "header2 header2"
     "aside main";
- overflow: auto;
+  overflow: auto;
 }
 
 .header2-container {
   grid-area: header2;
-  background-color: #f4f4f4;
   padding: 1rem;
+  height: 40px;
 }
 
 aside {
   grid-area: aside;
-
 }
 
-
-.main {
+main {
   grid-area: main;
   background-color: #fff;
   scroll-behavior: smooth;
-  overflow: auto;
+  padding-top: 40px; /* même valeur que la hauteur du header */
   transition: all 0.4s ease-in-out;
-
+  
 }
 /* Quand aside est caché */
 .layout-hideAside {
@@ -37,13 +35,5 @@ aside {
     "header2"
     "main";
 }
-
-/* Zones */
-.header2-container {
-  grid-area: header2;
+@media screen and (max-width: 768px) {
 }
-@media screen and (max-width:768px){
-  
-   
-}
-
