@@ -252,7 +252,6 @@ export default function Reservation() {
                 setErrs(erreurs);
                 return;
               }
-              setConfirmation(!confirmation);
             }}
           />{" "}
         </>
