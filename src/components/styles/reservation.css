@@ -1,5 +1,5 @@
 .res-container {
-  height: 100%;
+  min-height: 100vh;
   width: 100%;
   display: flex;
   align-items: center;
@@ -12,7 +12,11 @@
   scroll-behavior: smooth;
   padding-top: 5rem;
   position: relative;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
+
 .res-container form {
   display: flex;
   position: relative;
@@ -21,6 +25,7 @@
   flex-direction: column;
   height: fit-content;
   width: auto;
+  max-width: 100%;
   padding: 1rem;
   background-color: rgba(0, 0, 0, 0.7); /* Fond noir translucide */
   border-radius: 20px;
@@ -32,6 +37,8 @@
   align-items: center;
   flex-wrap: wrap;
   justify-content: center;
+  max-width: 100%;
+  overflow: hidden;
 }
 .res-container button {
   background-color: black;

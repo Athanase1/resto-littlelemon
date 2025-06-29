@@ -71,10 +71,11 @@ export default function Reservation() {
     );
     setChargement(false)
     if (res.success) {
+       setAfficheComfirmation(true);
       setTimeout(() => {
-        setAfficheComfirmation(true);
-      }, 2000);
+       setAfficheComfirmation(false)
        navigate("/")
+      }, 2000);
     } else {
       setMessage(res.message);
       alert(messageComfirmation)
@@ -252,6 +253,7 @@ export default function Reservation() {
                 setErrs(erreurs);
                 return;
               }
+              setConfirmation(!confirmation);
             }}
           />{" "}
         </>

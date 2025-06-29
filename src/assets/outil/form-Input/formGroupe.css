@@ -95,10 +95,11 @@ label {
     min-width: 98%;
   }
   .icon .bi {
-  color: white;
+  color: black;
   font-size: 4vw !important;
 }
 .input-groupe input{
   font-size: 3vw;
+  color: black;
 }
 }
