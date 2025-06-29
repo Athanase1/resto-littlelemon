@@ -6,6 +6,7 @@ import { UserContext } from "../../../store/AuthContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import LoadingScreen from "../../../components/layout/Loading";
+import { validerConnexion, validerForm } from "../../../service/validerInputs";
 
 export default function Form({ authen }) {
   const [seConnecte, setSeconnecte] = useState(true);
@@ -16,6 +17,17 @@ export default function Form({ authen }) {
   const [tel, setTel] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState();
+  const [errs, setErrs] = useState([]);
+  const erreurs = validerForm({
+    nom,
+    prenom,
+    email,
+    tel,
+  });
+ /* const erreurCon = validerConnexion({
+    email,
+    password,
+  });*/
 
   const authCtx = useContext(UserContext);
   const navigate = useNavigate();
@@ -26,7 +38,6 @@ export default function Form({ authen }) {
     try {
       let result;
       if (seConnecte) {
-
         result = await authCtx.connexion(email, password);
       } else {
         result = await authCtx.inscriptionEtConnexion(
@@ -37,7 +48,6 @@ export default function Form({ authen }) {
           password
         );
       }
-      
 
       if (result?.success) {
         setError(null);
@@ -74,18 +84,21 @@ export default function Form({ authen }) {
             onChange={(e) => {
               setNom(e.target.value);
             }}
+            erreur={errs.nom}
           />
           <Input
             label="Prénom"
             nom="prenom"
             value={prenom}
             onChange={(e) => setPrenom(e.target.value)}
+            erreur={errs.prenom}
           />
           <Input
             label="Numero"
             nom="numero"
             value={tel}
             onChange={(e) => setTel(e.target.value)}
+            erreur={errs.tel}
           />
           <Input
             label="Email"
@@ -93,6 +106,7 @@ export default function Form({ authen }) {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            erreur={errs.email}
           />
         </>
       )}
@@ -105,18 +119,21 @@ export default function Form({ authen }) {
                 nom="nom"
                 value={nom}
                 onChange={(e) => setNom(e.target.value)}
+                erreur={errs.nom}
               />
               <Input
                 label="Prénom"
                 nom="prenom"
                 value={prenom}
                 onChange={(e) => setPrenom(e.target.value)}
+                erreur={errs.prenom}
               />
               <Input
                 label="Numero"
                 nom="numero"
                 value={tel}
                 onChange={(e) => setTel(e.target.value)}
+                erreur={errs.tel}
               />
             </>
           )}
@@ -126,6 +143,7 @@ export default function Form({ authen }) {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            erreur={errs.email}
           />
           <Input
             label="Mot de passe"
@@ -133,6 +151,7 @@ export default function Form({ authen }) {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            erreur={errs.password}
           />
         </>
       )}
@@ -141,7 +160,13 @@ export default function Form({ authen }) {
         text={seConnecte ? "Se connecter" : "S'incrire"}
         icon2="bi-arrow-right"
         type="submit"
-        onClick={gestionSubmission}
+        onClick={() => {
+          if (Object.keys(erreurs).length > 0) {
+            setErrs(erreurs);
+            return;
+          }
+          gestionSubmission();
+        }}
       />
       {authen && (
         <p

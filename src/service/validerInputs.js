@@ -43,6 +43,11 @@ export function validernbPersonnes(nbPersonnes) {
   // Vérifie que c'est un nombre entier et >= 1
   return !isNaN(converti) && Number.isInteger(converti) && converti >= 1;
 }
+export function validerMotDePasse(password) {
+  const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+  return regex.test(password);
+}
+
 
 export function validerChampsReservation(champs, date,nbPersonnes, occ,heure) {
   const erreurs = {};
@@ -91,4 +96,44 @@ export function validerChampsReservation(champs, date,nbPersonnes, occ,heure) {
 
   return erreurs;
 }
+export function validerForm(champs){
+ const  erreurs = {}
+ if (!champs.nom || champs.nom.trim().length < 2) {
+    erreurs.nom = "Le nom est obligatoire (min. 2 caractères)";
+  }
+   if (!champs.prenom || champs.prenom.trim().length < 2) {
+    erreurs.prenom = "Le prénom est obligatoire (min. 2 caractères)";
+  }
+   if (!champs.tel) {
+    erreurs.tel = "Le numéro de téléphone est obligatoire";
+  } else if (!validerTelephone(champs.tel)) {
+    erreurs.tel = "Numéro de téléphone invalide";
+  }
+    if (!champs.email) {
+    erreurs.email = "L'email est obligatoire";
+  } else if (!validerEmail(champs.email)) {
+    erreurs.email = "Format d'email invalide";
+  }
+    if(!champs.password){
+    erreurs.password = "Champ obligatoire"
+  } else if(!validerMotDePasse(champs.password)){
+    erreurs.password = "Mot de passe Invalide"
+  }
+  return erreurs;
+}
+export function validerConnexion(champs){
+  const erreurs = {}
+  if(!champs.password){
+    erreurs.password = "Champ obligatoire"
+  } else if(!validerMotDePasse(champs.password)){
+    erreurs.password = "Mot de passe Invalide"
+  }
+      if (!champs.email) {
+    erreurs.email = "L'email est obligatoire";
+  } else if (!validerEmail(champs.email)) {
+    erreurs.email = "Format d'email invalide";
+  }
+  return erreurs;
+}
+
 
