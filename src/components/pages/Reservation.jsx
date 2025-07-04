@@ -18,7 +18,6 @@ import { ReservationContext } from "../../store/ReservationContext";
 import { validerChampsReservation } from "../../service/validerInputs";
 import Confirmation from "../../assets/outil/confirmation/confirmation";
 import { useNavigate } from "react-router-dom";
-import LoadingScreen from "../layout/Loading";
 
 export default function Reservation() {
   const authContext = useContext(UserContext);
@@ -31,7 +30,7 @@ export default function Reservation() {
   const [occasion, setOccasion] = useState("");
   const [heure, setHeure] = useState("");
   const [confirmation, setConfirmation] = useState(false);
-  const [messageComfirmation, setMessage] = useState("");
+  const [messageConfirmation, setMessage] = useState("");
   const [errs, setErrs] = useState([]);
   const [afficheComfirmation, setAfficheComfirmation] = useState(false);
   const [chargement, setChargement] = useState(false)
@@ -78,7 +77,7 @@ export default function Reservation() {
       }, 2000);
     } else {
       setMessage(res.message);
-      alert(messageComfirmation)
+      alert(messageConfirmation)
     }
   };
 
@@ -126,6 +125,7 @@ export default function Reservation() {
         <>
           <form action="" method="post">
             <div className="champs1">
+              <div className="f-container">
               <FormGroupe
                 value={dat}
                 handleClick={() => handleClick("date")}
@@ -139,6 +139,9 @@ export default function Reservation() {
               />
               {date && date.length > 0 && (
                 <div className={estClic.date ? "liste" : "cacherListe"}>
+                  <i className="bi bi-x" onClick={() =>{
+                    setEstClic(!estClic)
+                  }}></i>
                   {date.map((d, key) => (
                     <li key={key} onClick={() => gererChoix("date", d.value)}>
                       {d.label}
@@ -146,7 +149,9 @@ export default function Reservation() {
                   ))}
                 </div>
               )}
+              </div>
 
+              <div className="f-container">
               <FormGroupe
                 value={nbPersonnes}
                 handleClick={() => handleClick("nbPersonnes")}
@@ -160,6 +165,9 @@ export default function Reservation() {
               />
               {Personnes && Personnes.length > 0 && (
                 <div className={estClic.nbPersonnes ? "liste" : "cacherListe"}>
+                   <i className="bi bi-x" onClick={() =>{
+                    setEstClic(!estClic)
+                  }}></i>
                   {Personnes.map((item, index) => (
                     <li
                       key={index}
@@ -170,7 +178,9 @@ export default function Reservation() {
                   ))}
                 </div>
               )}
+              </div>
 
+              <div className="f-container">
               <FormGroupe
                 value={occasion}
                 handleClick={() => handleClick("occasion")}
@@ -183,6 +193,9 @@ export default function Reservation() {
               />
               {occasions && occasions.length > 0 && (
                 <div className={estClic.occasion ? "liste" : "cacherListe"}>
+                   <i className="bi bi-x" onClick={() =>{
+                    setEstClic(!estClic)
+                  }}></i>
                   {occasions.map((item, index) => (
                     <li
                       key={index}
@@ -193,6 +206,9 @@ export default function Reservation() {
                   ))}
                 </div>
               )}
+              </div>
+
+              <div className="f-container">
               <FormGroupe
                 value={heure}
                 handleClick={() => handleClick("heure")}
@@ -205,6 +221,9 @@ export default function Reservation() {
               />
               {heuresDisponible && heuresDisponible.length > 0 && (
                 <div className={estClic.heure ? "liste" : "cacherListe"}>
+                   <i className="bi bi-x" onClick={() =>{
+                    setEstClic(!estClic)
+                  }}></i>
                   {heuresDisponible.map((item, index) => (
                     <li key={index} onClick={() => gererChoix("heure", item)}>
                       {item}
@@ -213,7 +232,7 @@ export default function Reservation() {
                 </div>
               )}
             </div>
-
+            </div>
             <div className="champs2">
               <Input
                 label="Nom"
@@ -246,7 +265,7 @@ export default function Reservation() {
             </div>
           </form>
           <ButtonPlat
-            text="Comfirmez la reservation"
+            text="Confirmez la reservation"
             icon2="bi-check-circle"
             onClick={() => {
               if (Object.keys(erreurs).length > 0) {

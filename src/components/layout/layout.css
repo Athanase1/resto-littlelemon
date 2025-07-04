@@ -176,7 +176,9 @@ a:hover {
     justify-content: center;
     align-items: center;
   }
+ 
 }
+
 @media screen and (max-width: 768px) {
   header {
     flex-direction: column;
@@ -242,7 +244,7 @@ a:hover {
   }
 
   .footer-ul li a {
-    font-size: 0.5vw !important;
+    font-size: 1vw !important;
     color: gray !important;
   }
   .link-cacher li a {
@@ -255,6 +257,16 @@ a:hover {
   nav ul li a {
     font-size: 5vw !important;
   }
+   .copy{
+    font-size: 1vw !important;
+    color: white !important;
+    font-weight: bold;
+    -webkit-text-fill-color: black;
+  }
+  .copydiv img{
+    width: 20px !important;
+    height: 20px !important;
+  }
 
   .linkshead .bi {
     font-size: 2.5vw !important;
@@ -264,8 +276,12 @@ a:hover {
     font-size: 2vw !important;
     display: block;
   }
+   .d-flex nav ul li{
+    margin: 0  !important;
+   }
   .d-flex nav ul li a {
-    font-size: 1vw !important;
+    font-size: 2vw !important;
+   color: white !important;
   }
 
   footer nav {

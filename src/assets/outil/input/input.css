@@ -16,7 +16,7 @@
   text-align: center;
   background: none;
   font-weight: bold;
-  border-radius: 10px;
+  border-radius: 5px;
   color: white;
   box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.3), 0 4px 6px rgba(0, 0, 0, 0.2);
 }
@@ -53,6 +53,7 @@ label > span{
    .inputContainer input{
     max-width: 98%;
     height: 30px;
+    color: black;
   }
   .inputContainer{
     margin: 0;

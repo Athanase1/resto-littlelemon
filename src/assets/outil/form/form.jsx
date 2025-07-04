@@ -23,6 +23,7 @@ export default function Form({ authen }) {
     prenom,
     email,
     tel,
+    password
   });
  /* const erreurCon = validerConnexion({
     email,
@@ -35,6 +36,10 @@ export default function Form({ authen }) {
     e.preventDefault();
     setLoading(true);
     setError(null);
+    if (Object.keys(erreurs).length > 0) {
+            setErrs(erreurs);
+            return;
+          };
     try {
       let result;
       if (seConnecte) {
@@ -160,13 +165,7 @@ export default function Form({ authen }) {
         text={seConnecte ? "Se connecter" : "S'incrire"}
         icon2="bi-arrow-right"
         type="submit"
-        onClick={() => {
-          if (Object.keys(erreurs).length > 0) {
-            setErrs(erreurs);
-            return;
-          }
-          gestionSubmission();
-        }}
+        onClick={gestionSubmission}
       />
       {authen && (
         <p

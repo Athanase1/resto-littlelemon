@@ -4,7 +4,6 @@
   align-items: flex-start;
   justify-content: center;
   position: relative;
-  
 }
 .icon .bi {
   display: block;
@@ -96,7 +95,7 @@ label {
   }
   .icon .bi {
   color: black;
-  font-size: 4vw !important;
+  font-size: 6vw !important;
 }
 .input-groupe input{
   font-size: 3vw;

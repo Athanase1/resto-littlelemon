@@ -1,13 +1,13 @@
 .layout-sansHeader {
   display: grid;
   min-height: 100vh;
-  width: 100%;
+  width: 100vw;
   grid-template-columns: auto 1fr; /* aside + main */
   grid-template-rows: auto 1fr; /* header + content */
   grid-template-areas:
     "header2 header2"
     "aside main";
-  overflow: auto;
+ 
 }
 
 .header2-container {
@@ -26,6 +26,9 @@ main {
   scroll-behavior: smooth;
   padding-top: 40px; /* même valeur que la hauteur du header */
   transition: all 0.4s ease-in-out;
+   -webkit-overflow-scrolling: touch; /* pour iOS */
+     overflow-y: auto;
+  height: 100%;
   
 }
 /* Quand aside est caché */
