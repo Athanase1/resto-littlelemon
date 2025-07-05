@@ -8,6 +8,7 @@
      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
      border-radius: 20px;
      padding: 1rem;
+     max-width: 100%;
 }
 .photoetNom{
     display: flex;
@@ -23,7 +24,7 @@
 }
 .photoetNom h1{
     font-weight: bold;
-    font-size: 4vw;
+    font-size: 1vw;
 }
 .inputs{
     display: flex;
@@ -38,16 +39,32 @@
 .inputs input{
     box-shadow: none;
     border-bottom: 1px solid black;
+    cursor: pointer;
+ 
+    border: none;
+    margin-top: 1rem;
+    background: none;
+}
+.input{
+       width: 100%;
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+}
+.bns{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 .UserCard button{
     margin: 1rem;
 }
 @media screen and (max-width:500px) {
-    .UserCard{
-        width: 350px;
-    }
+  
     .photoetNom h1{
     font-weight: bold;
     font-size: 5vw;
 }
+
 }

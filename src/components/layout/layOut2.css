@@ -29,7 +29,6 @@ main {
    -webkit-overflow-scrolling: touch; /* pour iOS */
      overflow-y: auto;
   height: 100%;
-  
 }
 /* Quand aside est caché */
 .layout-hideAside {

@@ -19,7 +19,7 @@ export default function UserProvider({ children }) {
   // Fonction pour rafraîchir le token
   const refreshToken = useCallback(async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/users/refresh", {
+      const res = await axios.get("https://project1-backend-2gj1.onrender.com/api/users/refresh", {
         withCredentials: true, // envoie les cookies (refresh token)
       });
 
@@ -109,7 +109,7 @@ export default function UserProvider({ children }) {
         { email, password },
         { withCredentials: true }
       );
-      const { token, utilisateur } = res.data;
+      const { token, utilisateur} = res.data;
 
       localStorage.setItem("accessToken", token);
       localStorage.setItem("utilisateur", JSON.stringify(utilisateur));
@@ -119,8 +119,7 @@ export default function UserProvider({ children }) {
       return { success: true };
     } catch (error) {
       // Extraction du message d'erreur envoyé par le backend
-      const message = "info invalide"
-      return { success: false, message };
+      return { success: false, message:error.response?.data?.message || "Erreur de connexion"};
     }
   };
 

@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import ButtonPlat from "../buttons/buttonflat";
 import Input from "../input/input";
 import "./form.css";
 import { UserContext } from "../../../store/AuthContext";
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import LoadingScreen from "../../../components/layout/Loading";
 import { validerConnexion, validerForm } from "../../../service/validerInputs";
@@ -17,29 +16,26 @@ export default function Form({ authen }) {
   const [tel, setTel] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState();
-  const [errs, setErrs] = useState([]);
-  const erreurs = validerForm({
-    nom,
-    prenom,
-    email,
-    tel,
-    password
-  });
- /* const erreurCon = validerConnexion({
-    email,
-    password,
-  });*/
+  const [errs, setErrs] = useState({});
 
   const authCtx = useContext(UserContext);
   const navigate = useNavigate();
+
   const gestionSubmission = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
+
+    const erreurs = seConnecte
+      ? validerConnexion({ email, password })
+      : validerForm({ nom, prenom, email, tel, password });
+
     if (Object.keys(erreurs).length > 0) {
-            setErrs(erreurs);
-            return;
-          };
+      setErrs(erreurs);
+      setLoading(false);
+      return;
+    }
+
     try {
       let result;
       if (seConnecte) {
@@ -56,7 +52,6 @@ export default function Form({ authen }) {
 
       if (result?.success) {
         setError(null);
-        // Reset des champs seulement si succès
         setNom("");
         setPrenom("");
         setTel("");
@@ -73,106 +68,111 @@ export default function Form({ authen }) {
       setLoading(false);
     }
   };
-  if (loading) return <LoadingScreen text="Connexion en cours patientez" />;
+
+  if (loading) return <LoadingScreen text="Connexion en cours, patientez..." />;
+
   return (
     <div className="form-container">
       <>
-        {authen && <h1>Connectez Vous !</h1>}
-        {error && <h1>{error}</h1>}
+        {authen && <h1>Connectez-vous !</h1>}
+        {error && <p className="message-erreur">{error}</p>}
       </>
-      {!authen && (
-        <>
-          <Input
-            label="Nom"
-            nom="nom"
-            value={nom}
-            onChange={(e) => {
-              setNom(e.target.value);
-            }}
-            erreur={errs.nom}
-          />
-          <Input
-            label="Prénom"
-            nom="prenom"
-            value={prenom}
-            onChange={(e) => setPrenom(e.target.value)}
-            erreur={errs.prenom}
-          />
-          <Input
-            label="Numero"
-            nom="numero"
-            value={tel}
-            onChange={(e) => setTel(e.target.value)}
-            erreur={errs.tel}
-          />
-          <Input
-            label="Email"
-            nom="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            erreur={errs.email}
-          />
-        </>
-      )}
-      {authen && (
-        <>
-          {!seConnecte && (
-            <>
-              <Input
-                label="Nom"
-                nom="nom"
-                value={nom}
-                onChange={(e) => setNom(e.target.value)}
-                erreur={errs.nom}
-              />
-              <Input
-                label="Prénom"
-                nom="prenom"
-                value={prenom}
-                onChange={(e) => setPrenom(e.target.value)}
-                erreur={errs.prenom}
-              />
-              <Input
-                label="Numero"
-                nom="numero"
-                value={tel}
-                onChange={(e) => setTel(e.target.value)}
-                erreur={errs.tel}
-              />
-            </>
-          )}
-          <Input
-            label="Email"
-            nom="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            erreur={errs.email}
-          />
-          <Input
-            label="Mot de passe"
-            nom="motPasse"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            erreur={errs.password}
-          />
-        </>
-      )}
-      <ButtonPlat
-        icon1="bi-person"
-        text={seConnecte ? "Se connecter" : "S'incrire"}
-        icon2="bi-arrow-right"
-        type="submit"
-        onClick={gestionSubmission}
-      />
+      <form onSubmit={gestionSubmission}>
+        {!authen && (
+          <>
+            <Input
+              label="Nom"
+              nom="nom"
+              value={nom}
+              onChange={(e) => setNom(e.target.value)}
+              erreur={errs.nom}
+            />
+            <Input
+              label="Prénom"
+              nom="prenom"
+              value={prenom}
+              onChange={(e) => setPrenom(e.target.value)}
+              erreur={errs.prenom}
+            />
+            <Input
+              label="Numéro"
+              nom="tel"
+              value={tel}
+              onChange={(e) => setTel(e.target.value)}
+              erreur={errs.tel}
+            />
+            <Input
+              label="Email"
+              nom="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              erreur={errs.email}
+            />
+          </>
+        )}
+
+        {authen && (
+          <>
+            {!seConnecte && (
+              <>
+                <Input
+                  label="Nom"
+                  nom="nom"
+                  value={nom}
+                  onChange={(e) => setNom(e.target.value)}
+                  erreur={errs.nom}
+                />
+                <Input
+                  label="Prénom"
+                  nom="prenom"
+                  value={prenom}
+                  onChange={(e) => setPrenom(e.target.value)}
+                  erreur={errs.prenom}
+                />
+                <Input
+                  label="Numéro"
+                  nom="tel"
+                  value={tel}
+                  onChange={(e) => setTel(e.target.value)}
+                  erreur={errs.tel}
+                />
+              </>
+            )}
+            <Input
+              label="Email"
+              nom="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              erreur={errs.email}
+            />
+            <Input
+              label="Mot de passe"
+              nom="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              erreur={errs.password}
+            />
+          </>
+        )}
+
+        <ButtonPlat
+          icon1="bi-person"
+          text={seConnecte ? "Se connecter" : "S'inscrire"}
+          icon2="bi-arrow-right"
+          type="submit"
+        />
+      </form>
+
       {authen && (
         <p
           className="toggle-auth"
           onClick={() => {
             setSeconnecte((prev) => !prev);
             setError(null);
+            setErrs({});
           }}
         >
           {seConnecte

@@ -1,0 +1,41 @@
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 600px;
+  max-width: 100%;
+}
+.reservations-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  max-width: 100%;
+  width: 100%;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  border-radius: 20px;
+}
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 100%;
+  width: 100%;
+  padding: 1rem;
+}
+.head h1 {
+  text-wrap: nowrap !important;
+  font-size: 1.5rem;
+}
+.head i,
+.head i {
+  font-size: 2rem !important;
+}
+.reserves {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
