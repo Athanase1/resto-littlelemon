@@ -33,7 +33,7 @@ export default function Reservation() {
   const [messageConfirmation, setMessage] = useState("");
   const [errs, setErrs] = useState([]);
   const [afficheComfirmation, setAfficheComfirmation] = useState(false);
-  const [chargement, setChargement] = useState(false)
+  const [chargement, setChargement] = useState(false);
 
   const [estClic, setEstClic] = useState({
     date: false,
@@ -57,7 +57,7 @@ export default function Reservation() {
   }
 
   const reserverTable = async () => {
-    setChargement(true)
+    setChargement(true);
     const res = await resContext.reserver(
       dat,
       nbPersonnes,
@@ -68,16 +68,16 @@ export default function Reservation() {
       champs.tel,
       champs.email
     );
-    setChargement(false)
+    setChargement(false);
     if (res.success) {
-       setAfficheComfirmation(true);
+      setAfficheComfirmation(true);
       setTimeout(() => {
-       setAfficheComfirmation(false)
-       navigate("/")
+        setAfficheComfirmation(false);
+        navigate("/");
       }, 2000);
     } else {
       setMessage(res.message);
-      alert(messageConfirmation)
+      alert(messageConfirmation);
     }
   };
 
@@ -117,7 +117,6 @@ export default function Reservation() {
     const valeur = e.target.value;
     setChamps((champs) => ({ ...champs, [nom]: valeur }));
   };
-  
 
   return (
     <div className="res-container">
@@ -126,112 +125,126 @@ export default function Reservation() {
           <form action="" method="post">
             <div className="champs1">
               <div className="f-container">
-              <FormGroupe
-                value={dat}
-                handleClick={() => handleClick("date")}
-                estClic={estClic.date}
-                label="Date"
-                icon="bi bi-calendar"
-                name="date"
-                data={date}
-                valueConfimer={!!dat}
-                erreur={errs.date}
-              />
-              {date && date.length > 0 && (
-                <div className={estClic.date ? "liste" : "cacherListe"}>
-                  <i className="bi bi-x" onClick={() =>{
-                    setEstClic(!estClic)
-                  }}></i>
-                  {date.map((d, key) => (
-                    <li key={key} onClick={() => gererChoix("date", d.value)}>
-                      {d.label}
-                    </li>
-                  ))}
-                </div>
-              )}
+                <FormGroupe
+                  value={dat}
+                  handleClick={() => handleClick("date")}
+                  estClic={estClic.date}
+                  label="Date"
+                  icon="bi bi-calendar"
+                  name="date"
+                  data={date}
+                  valueConfimer={!!dat}
+                  erreur={errs.date}
+                />
+                {date && date.length > 0 && (
+                  <div className={estClic.date ? "liste" : "cacherListe"}>
+                    <i
+                      className="bi bi-x"
+                      onClick={() => {
+                        setEstClic(!estClic);
+                      }}
+                    ></i>
+                    {date.map((d, key) => (
+                      <li key={key} onClick={() => gererChoix("date", d.value)}>
+                        {d.label}
+                      </li>
+                    ))}
+                  </div>
+                )}
               </div>
 
               <div className="f-container">
-              <FormGroupe
-                value={nbPersonnes}
-                handleClick={() => handleClick("nbPersonnes")}
-                estClic={estClic.nbPersonnes}
-                label="Nombre de personnes"
-                icon="bi bi-people"
-                name="nbPersonnes"
-                data={Personnes}
-                valueConfimer={!!nbPersonnes}
-                erreur={errs.nbPersonnes}
-              />
-              {Personnes && Personnes.length > 0 && (
-                <div className={estClic.nbPersonnes ? "liste" : "cacherListe"}>
-                   <i className="bi bi-x" onClick={() =>{
-                    setEstClic(!estClic)
-                  }}></i>
-                  {Personnes.map((item, index) => (
-                    <li
-                      key={index}
-                      onClick={() => gererChoix("nbPersonnes", item.value)}
-                    >
-                      {item.label}
-                    </li>
-                  ))}
-                </div>
-              )}
+                <FormGroupe
+                  value={nbPersonnes}
+                  handleClick={() => handleClick("nbPersonnes")}
+                  estClic={estClic.nbPersonnes}
+                  label="Nombre de personnes"
+                  icon="bi bi-people"
+                  name="nbPersonnes"
+                  data={Personnes}
+                  valueConfimer={!!nbPersonnes}
+                  erreur={errs.nbPersonnes}
+                />
+                {Personnes && Personnes.length > 0 && (
+                  <div
+                    className={estClic.nbPersonnes ? "liste" : "cacherListe"}
+                  >
+                    <i
+                      className="bi bi-x"
+                      onClick={() => {
+                        setEstClic(!estClic);
+                      }}
+                    ></i>
+                    {Personnes.map((item, index) => (
+                      <li
+                        key={index}
+                        onClick={() => gererChoix("nbPersonnes", item.value)}
+                      >
+                        {item.label}
+                      </li>
+                    ))}
+                  </div>
+                )}
               </div>
 
               <div className="f-container">
-              <FormGroupe
-                value={occasion}
-                handleClick={() => handleClick("occasion")}
-                estClic={estClic.occasion}
-                label="Occasion"
-                icon=" bi bi-cup-straw"
-                name="occasion"
-                valueConfimer={!!occasion}
-                erreur={errs.occasion}
-              />
-              {occasions && occasions.length > 0 && (
-                <div className={estClic.occasion ? "liste" : "cacherListe"}>
-                   <i className="bi bi-x" onClick={() =>{
-                    setEstClic(!estClic)
-                  }}></i>
-                  {occasions.map((item, index) => (
-                    <li
-                      key={index}
-                      onClick={() => gererChoix("occasion", item)}
-                    >
-                      {item}
-                    </li>
-                  ))}
-                </div>
-              )}
+                <FormGroupe
+                  value={occasion}
+                  handleClick={() => handleClick("occasion")}
+                  estClic={estClic.occasion}
+                  label="Occasion"
+                  icon=" bi bi-cup-straw"
+                  name="occasion"
+                  valueConfimer={!!occasion}
+                  erreur={errs.occasion}
+                />
+                {occasions && occasions.length > 0 && (
+                  <div className={estClic.occasion ? "liste" : "cacherListe"}>
+                    <i
+                      className="bi bi-x"
+                      onClick={() => {
+                        setEstClic(!estClic);
+                      }}
+                    ></i>
+                    {occasions.map((item, index) => (
+                      <li
+                        key={index}
+                        onClick={() => gererChoix("occasion", item)}
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </div>
+                )}
               </div>
 
               <div className="f-container">
-              <FormGroupe
-                value={heure}
-                handleClick={() => handleClick("heure")}
-                estClic={estClic.heure}
-                label="Heure"
-                icon="bi bi-clock"
-                name="heure"
-                valueConfimer={!!heure}
-                erreur={errs.heure}
-              />
-              {heuresDisponible && heuresDisponible.length > 0 && (
-                <div className={estClic.heure ? "liste" : "cacherListe"}>
-                   <i className="bi bi-x" onClick={() =>{
-                    setEstClic(!estClic)
-                  }}></i>
-                  {heuresDisponible.map((item, index) => (
-                    <li key={index} onClick={() => gererChoix("heure", item)}>
-                      {item}
-                    </li>
-                  ))}
-                </div>
-              )}
-            </div>
+                <FormGroupe
+                  value={heure}
+                  handleClick={() => handleClick("heure")}
+                  estClic={estClic.heure}
+                  label="Heure"
+                  icon="bi bi-clock"
+                  name="heure"
+                  valueConfimer={!!heure}
+                  erreur={errs.heure}
+                />
+                {heuresDisponible && heuresDisponible.length > 0 && (
+                  <div className={estClic.heure ? "liste" : "cacherListe"}>
+                    <i
+                      className="bi bi-x"
+                      onClick={() => {
+                        setEstClic(!estClic);
+                      }}
+                    ></i>
+                    {heuresDisponible.map((item, index) => (
+                      <li key={index} onClick={() => gererChoix("heure", item)}>
+                        {item}
+                      </li>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
             <div className="champs2">
               <Input
@@ -301,7 +314,7 @@ export default function Reservation() {
             message="Réservation confirmée avec succès !"
             onClick={() => {
               setAfficheComfirmation(false);
-               navigate("/")
+              navigate("/");
             }}
           />
         </div>

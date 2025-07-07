@@ -4,6 +4,8 @@ import axios from "axios";
 export const ReservationContext = createContext({
   reserver: () => {},
   reservations: () => {},
+  modifier:() =>{},
+  supprimerReservation:() =>{},
   reserves: null,
 });
 
@@ -39,6 +41,52 @@ export default function ReserVationProvider({ children }) {
       };
     }
   };
+const modifier = async (id, date, nbPersonnes, occasion, heure) => {
+  try {
+    const res = await axios.put( // ← put est plus approprié que post ici
+      "https://project1-backend-2gj1.onrender.com/api/users/reservation/modifier",
+      { id, date, nbPersonnes, occasion, heure },
+      { withCredentials: true }
+    );
+
+    const { reservation, message } = res.data;
+    return { success: true, reservation, message };
+  } catch (error) {
+    return {
+      success: false,
+      message:
+        error.response?.data?.message ||
+        error.message ||
+        "Erreur inconnue lors de la modification.",
+    };
+    
+  }
+};
+
+ const supprimerReservation = async (id) => {
+  try {
+    const res = await axios.delete(
+      "https://project1-backend-2gj1.onrender.com/api/users/supprimer",
+      {
+        data: { id }, // le corps de la requête DELETE
+        withCredentials: true,
+      }
+    );
+
+    return {
+      success: true,
+      message: res.data.message,
+    };
+  } catch (e) {
+    return {
+      success: false,
+      message:
+        e.response?.data?.message ||
+        e.message ||
+        "Erreur inconnue lors de la suppression.",
+    };
+  }
+};
 
 const reservations = async (tel) => {
   try {
@@ -63,9 +111,12 @@ const reservations = async (tel) => {
 };
 
 
+
   const value = {
     reserver:reserver,
     reservations:reservations,
+    modifier:modifier,
+    supprimerReservation:supprimerReservation,
     reserves:reserves,
   };
 

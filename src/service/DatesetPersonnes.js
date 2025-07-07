@@ -47,3 +47,23 @@ for (let i = 0; i < 7; i++) {
     label: affichage.charAt(0).toUpperCase() + affichage.slice(1), // pour l'affichage
   });
 }
+export const res = [
+  {
+    date:"2025-07-07",
+    nbPersonnes:"8",
+    occasion:"Aniversaire",
+    heure:"19:00"
+  },
+    {
+    date:"2025-07-07",
+    nbPersonnes:"8",
+    occasion:"Aniversaire",
+    heure:"19:00"
+  },
+    {
+    date:"2025-07-07",
+    nbPersonnes:"8",
+    occasion:"Aniversaire",
+    heure:"19:00"
+  },
+]

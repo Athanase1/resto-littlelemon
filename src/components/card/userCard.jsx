@@ -7,9 +7,10 @@ export default function UserCard({
   onClick,
   champs,
   onChange,
-  onclick2,
-  estClic,
-  disabled
+  enregistrer,
+  clicks,
+  activerChamp,
+  aEteModifie
 }) {
   return (
     <div className="UserCard">
@@ -24,10 +25,12 @@ export default function UserCard({
             name="nom"
             value={champs.nom}
             onChange={onChange}
-            disabled={disabled}
-           
+            disabled={clicks.nom}
           />
-          <i className="bi bi-pencil-square" onClick={onclick2}></i>
+          <i
+            className="bi bi-pencil-square"
+            onClick={() => activerChamp("nom")}
+          ></i>
         </div>
         <div className="input">
           <input
@@ -35,10 +38,12 @@ export default function UserCard({
             name="prenom"
             value={champs.prenom}
             onChange={onChange}
-            disabled={disabled}
-            
+            disabled={clicks.prenom}
           />
-          <i className="bi bi-pencil-square" onClick={onclick2}></i>
+          <i
+            className="bi bi-pencil-square"
+            onClick={() => activerChamp("prenom")}
+          ></i>
         </div>
         <div className="input">
           <input
@@ -46,10 +51,12 @@ export default function UserCard({
             name="tel"
             value={champs.tel}
             onChange={onChange}
-            disabled={disabled}
-           
+            disabled={clicks.tel}
           />
-          <i className="bi bi-pencil-square" onClick={onclick2}></i>
+          <i
+            className="bi bi-pencil-square"
+            onClick={() => activerChamp("tel")}
+          ></i>
         </div>
         <div className="input">
           <input
@@ -57,10 +64,12 @@ export default function UserCard({
             name="email"
             value={champs.email}
             onChange={onChange}
-            disabled={disabled}
-       
+            disabled={clicks.email}
           />
-          <i className="bi bi-pencil-square" onClick={onclick2}></i>
+          <i
+            className="bi bi-pencil-square"
+            onClick={() => activerChamp("email")}
+          ></i>
         </div>
       </div>
       <div className="bns">
@@ -69,11 +78,13 @@ export default function UserCard({
           text="Se deconnecter"
           icon1="bi-box-arrow-left"
         />
-        
+
         <ButtonPlat
-          onClick={onClick}
-          text={estClic ? "Enregistrer":"modifier"}
+          text={"Enregistrer"}
           icon2="bi-check-circle"
+          type="submit"
+          disabled={!aEteModifie()}
+          onClick={enregistrer}
         />
       </div>
     </div>

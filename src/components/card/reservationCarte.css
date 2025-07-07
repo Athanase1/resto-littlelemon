@@ -1,0 +1,72 @@
+.reserve-container{
+    display: flex;
+    width: 250px;
+    height: 200px;
+    min-width: 250px;
+    max-width: 100%;
+    padding: 1rem;
+    flex-direction: column;
+    align-items: center;
+     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+     background-color: antiquewhite;
+     margin: 1%;
+     border-radius: 20px;
+     justify-content: space-between;
+}
+.details{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 100%;
+    width: 100%;
+}
+.detail{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+    width: fit-content;
+    padding: 1%;
+}
+.detail h1{
+    text-decoration: wavy;
+    font-style: oblique;
+    font-size: .8rem;
+}
+.detail i{
+    font-size: 2rem;
+    color: black;
+}
+.resbtns{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 100%;
+    
+}
+.resbtns>button+button{
+    color: black;
+    background-color: white;
+    outline: 2px solid green;
+}
+.resbtns button{
+    color: black;
+    background-color: white;
+    outline: 1px solid red;
+    border-radius: 10px; 
+}
+
+.header{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+#date{
+    font-weight: bold;
+    font-size: 1.5rem;
+}

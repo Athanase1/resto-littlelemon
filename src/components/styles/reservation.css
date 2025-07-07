@@ -1,143 +1,180 @@
+/* CONTENEUR PRINCIPAL */
 .res-container {
   min-height: 100vh;
   width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between !important;
+  justify-content: flex-start;
   background-image: url("../../assets/images/MarioandAdrianb.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  flex-direction: column;
   scroll-behavior: smooth;
-
   position: relative;
-  max-width: 100%;
   overflow-x: hidden;
   overflow-y: auto;
+  box-sizing: border-box;
 }
 
+/* FORMULAIRE DE RÉSERVATION */
 .res-container form {
   display: flex;
-  position: relative;
-  justify-content: center;
-  max-width: 678px !important;
   flex-direction: column;
-  height: fit-content;
+  justify-content: center;
+  position: relative;
   width: 100%;
+  max-width: 678px;
   padding: 1rem;
-  background-color: rgba(0, 0, 0, 0.7); /* Fond noir translucide */
+  background-color: rgba(0, 0, 0, 0.7);
   border-radius: 20px;
   backdrop-filter: blur(2px);
+  box-sizing: border-box;
 }
+
+/* CHAMPS */
 .champs1,
 .champs2 {
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
-  justify-content: center;
-  max-width: 100%;
- 
-}
-.res-container button {
-  background-color: black;
-  color: white;
-  height: fit-content !important;
-  margin: 1rem;
-}
-.f-container{
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.liste {
-  position: absolute;
-  top: calc(50% + 0.5rem); /* 0.5rem d’espacé sous l’input */
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end; /* prends la largeur du contenu ou du parent */
-  z-index: 100; /* au-dessus du reste */
-  background-color: #fff; /* fond blanc pour contraster */
-  border-radius: 8px;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
-  padding: 0.5rem 0;
-  width: fit-content;
-}
-.liste li{
-  text-overflow: ellipsis;
-  text-wrap: nowrap;
-}
-.cacherListe {
-  display: none;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .champs1 label {
   color: white;
   font-size: 1vw;
 }
+
 .champs2 .form-container {
-  background: none !important;
+  background: none;
 }
+
+/* BOUTON */
+.res-container button {
+  background-color: black;
+  color: white;
+  margin: 1rem auto;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* LISTE DE SUGGESTIONS */
+.f-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.liste {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+  z-index: 100;
+  width: fit-content;
+  max-width: 90vw;
+}
+
+.liste li {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0.3rem 0.8rem;
+  cursor: pointer;
+}
+
+.cacherListe {
+  display: none;
+}
+
+/* SECTION DES PLATS */
 .plats {
   display: flex;
+  justify-content: space-around;
   align-items: center;
   width: 100%;
   height: 200px;
-  justify-content: space-around;
   margin-top: 1rem;
+  gap: 1rem;
 }
+
 .plats img {
   width: 30%;
   height: 100%;
+  object-fit: cover;
   border-radius: 10px;
 }
-  .conf {
+
+/* CONFIRMATION POPUP */
+.conf {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* centre parfaitement horizontalement et verticalement */
+  transform: translate(-50%, -50%);
   z-index: 1000;
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  background-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+/* RESPONSIVE TABLETTE */
 @media screen and (max-width: 768px) {
   .champs1 label {
-    color: white;
     font-size: 3vw;
   }
+
   .res-container form {
     width: 100%;
   }
-  .champs1 {
-    margin-top: 4rem;
-  }
+
   .champs1,
   .champs2 {
-    flex-direction: column !important;
+    flex-direction: column;
+    margin-top: 2rem;
   }
 }
+
+/* RESPONSIVE MOBILE */
 @media screen and (max-width: 500px) {
   .plats img {
-    width: 100px !important;
-    height: 100px !important;
+    width: 100px;
+    height: 100px;
   }
+
   .res-container {
     background: none;
   }
+
   .plats {
     height: fit-content;
+    flex-direction: column;
   }
 
   .res-container form {
     background-color: white;
+    color: black;
   }
+}
+* {
+  box-sizing: border-box;
+}
+html, body {
+  margin: 0;
+  padding: 0;
 }

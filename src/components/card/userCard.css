@@ -1,70 +1,68 @@
-.UserCard{
-    display: flex;
-    width: 600px;
-    height: fit-content;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-     border-radius: 20px;
-     padding: 1rem;
-     max-width: 100%;
+.UserCard {
+  display: flex;
+  width: 100% !important;
+  height: fit-content;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  border-radius: 20px;
+  max-width: 100% !important;
 }
-.photoetNom{
-    display: flex;
-    width: 90%;
-    justify-content: space-between;
-    height: fit-content;
-    align-items: center;
+.photoetNom {
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+  height: fit-content;
+  align-items: center;
 }
-.photoetNom img{
-    width: 50px;
-    height: 50px;
-    border-radius: 25px;
+.photoetNom img {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
 }
-.photoetNom h1{
-    font-weight: bold;
-    font-size: 1vw;
+.photoetNom h1 {
+  font-weight: bold;
+  font-size: 1vw;
 }
-.inputs{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    width: 98%;
+.inputs {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 98%;
 }
-.inputs label{
-    color: black;
+.inputs label {
+  color: black;
 }
-.inputs input{
-    box-shadow: none;
-    border-bottom: 1px solid black;
-    cursor: pointer;
- 
-    border: none;
-    margin-top: 1rem;
-    background: none;
+.inputs input {
+  box-shadow: none;
+  border-bottom: 1px solid black;
+  cursor: pointer;
+
+  border: none;
+  margin-top: 1rem;
+  background: none;
 }
-.input{
-       width: 100%;
-       display: flex;
-       justify-content: space-between;
-       align-items: center;
+.input {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.bns{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
+.bns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
-.UserCard button{
-    margin: 1rem;
+.UserCard button {
+  margin: 1rem;
 }
-@media screen and (max-width:500px) {
-  
-    .photoetNom h1{
+@media screen and (max-width: 500px) {
+  .photoetNom h1 {
     font-weight: bold;
     font-size: 5vw;
-}
-
+  }
+   
 }

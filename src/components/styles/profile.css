@@ -3,39 +3,111 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 600px;
-  max-width: 100%;
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  padding: 1rem;
+  box-sizing: border-box;
+  position: relative;
 }
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+
+.container {
+  width: 100%;
+}
+
 .reservations-container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  max-width: 100%;
   width: 100%;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
   border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
 }
+
 .head {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 100%;
   width: 100%;
   padding: 1rem;
+  box-sizing: border-box;
 }
+
 .head h1 {
-  text-wrap: nowrap !important;
   font-size: 1.5rem;
+  white-space: nowrap;
 }
-.head i,
+
 .head i {
-  font-size: 2rem !important;
+  font-size: 2rem;
+  cursor: pointer;
 }
+
 .reserves {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
+  overflow-x: auto;
   width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+  gap: 1rem;
+  flex-wrap: nowrap;
+}
+
+.zoneForm {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+  background-color: #ffffff;
+  z-index: 1000;
+  border-radius: 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+@media screen and (max-width: 768px) {
+  .profile-container {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .zoneForm {
+    position: fixed;
+    bottom: 0;
+    top: auto;
+    left: 0;
+    right: 0;
+    border-radius: 15px 15px 0 0;
+    padding: 1rem;
+    z-index: 1000;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .head h1 {
+    font-size: 1.2rem;
+  }
+
+  .head i {
+    font-size: 1.5rem;
+  }
+
+  .reserves {
+    flex-direction: column;
+    align-items: stretch;
+    overflow-x: hidden;
+  }
 }

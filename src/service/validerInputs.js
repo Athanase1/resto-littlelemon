@@ -135,5 +135,27 @@ export function validerConnexion(champs){
   }
   return erreurs;
 }
+export function validerChampModification(date, nbPersonnes, occ,heure){
+   const  erreurs = {}
+    if (!heure) {
+    erreurs.heure = "L'heure est obligatoire";
+  } else if (!["18:00", "19:00", "20:00", "21:00"].includes(heure)) {
+    erreurs.heure = "L'heure doit être entre 18h et 21h";
+  }
+    if (!occ || occ.trim().length < 3) {
+    erreurs.occasion = "L'occasion est obligatoire (min. 3 caractères)";
+  }
+   if (!date) {
+    erreurs.date = "La date est obligatoire";
+  } else if (!validerDate(date)) {
+    erreurs.date = "La date doit être aujourd'hui ou dans les 7 jours";
+  }
+  if(!nbPersonnes){
+    erreurs.nbPersonnes = "Le nombre de personnes est obligatoire"
+  }else if(!validernbPersonnes(nbPersonnes)){
+        erreurs.nbPersonnes = "Le nombre de personnes est invalide."
+  }
+  return erreurs;
+}
 
 
