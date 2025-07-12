@@ -66,7 +66,7 @@ const modifier = async (id, date, nbPersonnes, occasion, heure) => {
  const supprimerReservation = async (id) => {
   try {
     const res = await axios.delete(
-      "https://project1-backend-2gj1.onrender.com/api/users/supprimer",
+      "https://project1-backend-2gj1.onrender.com/api/users/reservation/suppression",
       {
         data: { id }, // le corps de la requête DELETE
         withCredentials: true,

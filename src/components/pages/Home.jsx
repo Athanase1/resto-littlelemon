@@ -10,7 +10,11 @@ import TermsCard from "../card/terme/terme";
 export default function Home() {
   const navigate = useNavigate();
   const authCtx = useContext(UserContext);
-  const [showTerms, setShowTerms] = useState(true);
+ const [showTerms, setShowTerms] = useState(() => {
+  // Cette fonction sera appelée au premier rendu
+  return !localStorage.getItem("acceptedTerms");
+});
+
 
   useEffect(() => {
     const accepted = localStorage.getItem("acceptedTerms");
@@ -61,7 +65,7 @@ export default function Home() {
               text="Commandez en ligne"
               icon2="bi-arrow-right"
               onClick={() => {
-                navigate("/order");
+                navigate("/menu");
               }}
             />
           </div>
@@ -76,7 +80,7 @@ export default function Home() {
               key={item.id}
               img={item.img}
               onclick={() => {
-                navigate("/order");
+                navigate("/menu");
               }}
             />
           ))}

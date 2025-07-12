@@ -1,0 +1,27 @@
+.menu-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background-color: white;
+}
+
+.menu-table th,
+.menu-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.menu-table th {
+  background-color: #495e57;
+  color: white;
+}
+
+.menu-table img {
+  max-width: 100px;
+  border-radius: 10px;
+}
+tbody{
+    margin-top: 2rem;
+ 
+}

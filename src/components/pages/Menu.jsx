@@ -1,20 +1,32 @@
-import "../styles/home.css"
+import { plats } from "../../assets/data/special"
+import "../styles/menu.css"
 export default function Menu(){
     return(
-        <div className="links">
-        <div className="cat">
-             <h3>Categories</h3>
-             <h1 className="plus">See all &gt;</h1>
-        </div>
-       
-        <div className="bnts">
-        <button>Lunch</button>
-        <button>Mains</button>
-        <button>Desserts</button>
-        <button>A la carte</button>
-        <button>Specials</button>
-        <button>Online</button>
-        </div>
+        <div className="menu-container">
+
+      <div className="menus">
+  <table className="menu-table">
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Nom du plat</th>
+        <th>Description</th>
+        <th>Prix</th>
+      </tr>
+    </thead>
+    <tbody>
+      {plats.map((plat) => (
+        <tr key={plat.id}>
+          <td><img src={plat.img} alt={plat.titre} style={{ width: "80px", borderRadius: "8px" }} /></td>
+          <td>{plat.titre}</td>
+          <td>{plat.desc}</td>
+          <td>{plat.prix}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
     </div> 
     )
 }

@@ -16,7 +16,7 @@ export default function Aside({afficher, onClick, handleClick}){
             <li onClick={handleClick}><Link to="/">Home</Link></li>
             <li onClick={handleClick}><Link to="/about">About</Link></li>
             <li onClick={handleClick}><Link to="/reservation">Reservation</Link></li>
-            <li onClick={handleClick}><Link to="/menu">Order Online</Link></li>
+            <li onClick={handleClick}><Link to="/menu">Menu</Link></li>
           </ul>
         </aside>
     )

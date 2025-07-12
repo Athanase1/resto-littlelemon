@@ -5,6 +5,7 @@ import {
   Personnes,
   occasions,
   heuresDisponible,
+  dateFormatee,
 } from "../../service/DatesetPersonnes";
 import Input from "../../assets/outil/input/input";
 import "../styles/reservation.css";
@@ -15,32 +16,104 @@ import { useContext, useState } from "react";
 import ConfirmationCarte from "../card/ConfirmationCarte";
 import { UserContext } from "../../store/AuthContext";
 import { ReservationContext } from "../../store/ReservationContext";
-import { validerChampsReservation } from "../../service/validerInputs";
+import { validerChampModification, validerChampsReservation, validerTelephone } from "../../service/validerInputs";
 import Confirmation from "../../assets/outil/confirmation/confirmation";
 import { useNavigate } from "react-router-dom";
+import ReservationCarte from "../card/reservationCarte";
+import Form2 from "../../assets/outil/form/form2";
 
 export default function Reservation() {
   const authContext = useContext(UserContext);
   const resContext = useContext(ReservationContext);
   const navigate = useNavigate();
 
-  const [champs, setChamps] = useState({});
-  const [dat, setDate] = useState("");
-  const [nbPersonnes, setPersonnes] = useState("");
-  const [occasion, setOccasion] = useState("");
-  const [heure, setHeure] = useState("");
+  const [champs, setChamps] = useState({
+    nom:"Doe",
+    prenom:"John",
+    tel:"5819944946",
+    email:"exemple@gmail.com"
+  });
+  
+  const [dat, setDate] = useState(dateFormatee);
+  const [nbPersonnes, setPersonnes] = useState("8");
+  const [occasion, setOccasion] = useState("Anniversaire");
+  const [heure, setHeure] = useState("19:00");
   const [confirmation, setConfirmation] = useState(false);
   const [messageConfirmation, setMessage] = useState("");
   const [errs, setErrs] = useState([]);
   const [afficheComfirmation, setAfficheComfirmation] = useState(false);
   const [chargement, setChargement] = useState(false);
+  const [valR, setValR] = useState("");
+  const [err, setErr] = useState();
+  const [text, setText] = useState("")
+    const [demandeModif, setDemande] = useState(false);
+  const [res, setRes] = useState([])
+  const trouver = async () =>{
+    const err = validerTelephone(valR)
+    if(err){
+      setErr(err)
+      return
+    }
+    const result = resContext.reservations(valR)
+    if(result.data != null || result.data.length > 0){
+      setRes(result.data)
+    }
 
+  }
+  const modifier = async () => {
+      const erreurs = validerChampModification(
+        valeurs.date,
+        valeurs.nbPersonnes,
+        valeurs.occasion,
+        valeurs.heure
+      );
+  
+      if (Object.keys(erreurs).length > 0) {
+        return;
+      }
+  
+      setChargement(true);
+  
+      const res = await resContext.modifier(
+        id,
+        valeurs.date,
+        valeurs.nbPersonnes,
+        valeurs.occasion,
+        valeurs.heure
+      );
+      if (!res.success) {
+        alert(res.message);
+      }
+  
+      await trouverRes();
+  
+      setDemande(false);
+      setTimeout(() => setChargement(false), 1000);
+    };
+  // Champs pour modification
+  const [valeurs, setValeurs] = useState({
+    date: "",
+    nbPersonnes: "",
+    occasion: "",
+    heure: "",
+  });
+      const gererChangement2 = (e) => {
+    const nom = e.target.name;
+    const valeur = e.target.value;
+    setValeurs((valeurs) => ({ ...valeurs, [nom]: valeur }));
+  };
   const [estClic, setEstClic] = useState({
     date: false,
     nbPersonnes: false,
     occasion: false,
     heure: false,
   });
+  const erreurs2 = validerChampModification(
+      valeurs.date,
+      valeurs.nbPersonnes,
+      valeurs.occasion,
+      valeurs.heure
+    );
   const erreurs = validerChampsReservation(
     champs,
     dat,
@@ -104,12 +177,17 @@ export default function Reservation() {
       default:
         break;
     }
+ 
 
     // Ferme la liste après le choix
     setEstClic((prev) => ({
       ...prev,
       [champ]: false,
     }));
+  }
+  function handleChangement(e){
+    const val = e.target.value
+    setValR(val)
   }
 
   const gererChangement = (e) => {
@@ -120,6 +198,27 @@ export default function Reservation() {
 
   return (
     <div className="res-container">
+      <div className="zoneRecherche">
+        <div className="searc-input">
+          <Input
+            value={valR}
+            onChange={handleChangement}
+            erreur={err}
+          />
+          <ButtonPlat
+            icon2="bi-search"
+            text="Trouver"
+            onClick={trouver}
+            
+          />
+        </div>
+        <div className="reserves">
+          {res.map((res) => (
+            <ReservationCarte details={res} />
+          ))}
+        </div>
+      </div>
+      <h1>Reserver une table!</h1>
       {!confirmation && (
         <>
           <form action="" method="post">
@@ -253,6 +352,7 @@ export default function Reservation() {
                 value={champs.nom}
                 onChange={gererChangement}
                 erreur={errs.nom}
+              
               />
               <Input
                 label="Prenom"
@@ -260,6 +360,7 @@ export default function Reservation() {
                 value={champs.prenom}
                 onChange={gererChangement}
                 erreur={errs.prenom}
+             
               />
               <Input
                 label="Email"
@@ -267,6 +368,7 @@ export default function Reservation() {
                 value={champs.email}
                 onChange={gererChangement}
                 erreur={errs.email}
+               
               />
               <Input
                 label="Tel"
@@ -274,6 +376,7 @@ export default function Reservation() {
                 value={champs.tel}
                 onChange={gererChangement}
                 erreur={errs.tel}
+                
               />
             </div>
           </form>
@@ -324,6 +427,15 @@ export default function Reservation() {
         <img src={img1} alt="img 1" />
         <img src={img2} alt="img 2" />
         <img src={img3} alt="img 3" />
+      </div>
+      <div className="zoneForm">
+    {demandeModif && <Form2
+        champs={valeurs}
+        errs={erreurs2}
+        annuler={() => setDemande(false)}
+        enregister={modifier}
+        gererChangement={gererChangement2}
+      />}
       </div>
     </div>
   );

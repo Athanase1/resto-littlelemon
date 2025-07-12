@@ -1,9 +1,10 @@
 .btnContainer {
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  width: fit-content !important;
+  justify-content: space-around !important;
+
   height: fit-content !important;
+  min-width: 100px;
    background-color: #F4CE14;
     color: #495E57;
     font-weight: bold;

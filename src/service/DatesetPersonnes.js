@@ -67,3 +67,10 @@ export const res = [
     heure:"19:00"
   },
 ]
+const aujourdHui = new Date();
+const jour = aujourdHui.getDate(); // ex: 12
+const mois = aujourdHui.getMonth() + 1; // ex: 7 (attention: janvier = 0)
+const annee = aujourdHui.getFullYear(); // ex: 2025
+
+export const dateFormatee = `${annee}-${mois.toString().padStart(2, '0')}-${jour.toString().padStart(2, '0')}`;
+

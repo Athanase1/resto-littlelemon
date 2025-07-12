@@ -21,7 +21,7 @@ export default function About() {
               onClick={handleClick}
             ></i>
           </div>
-          <p className={click && "p-long"}>
+          <p className={click ?"p-long": ""}>
             Bienvenue chez Little Lemon, un restaurant méditerranéen familial où
             la tradition culinaire rencontre la modernité. Situé au cœur de la
             ville, notre établissement s’inspire de recettes transmises de
