@@ -61,7 +61,6 @@ export default function UserProvider({ children }) {
       axios.interceptors.request.eject(requestInterceptor);
     };
   }, []);
-
   useEffect(() => {
     const interceptor = axios.interceptors.response.use(
       (response) => response,
@@ -75,15 +74,17 @@ export default function UserProvider({ children }) {
         ) {
           originalRequest._retry = true;
           const newToken = await refreshToken();
+
           if (newToken) {
             originalRequest.headers["Authorization"] = "Bearer " + newToken;
             return axios(originalRequest);
           } else {
-            return Promise.reject(error);
+            // ✅ Empêche affichage d’erreur inutile dans console
+            return new Promise(() => {}); // ← bloque sans rejet
           }
         }
 
-        return Promise.reject(error);
+        return Promise.reject(error); // ← pour erreurs normales
       }
     );
 
@@ -114,27 +115,33 @@ export default function UserProvider({ children }) {
     }
   };
 
-  const connexion = async (email, password) => {
-    try {
-      const res = await axios.post(
-        "https://project1-backend-2gj1.onrender.com/api/users/connexion",
-        { email, password },
-        { withCredentials: true }
-      );
+ const connexion = async (email, password) => {
+  try {
+    const res = await axios.post(
+      "https://project1-backend-2gj1.onrender.com/api/users/connexion",
+      { email, password },
+      { withCredentials: true }
+    );
 
-      const { token, utilisateur } = res.data;
-      localStorage.setItem("accessToken", token);
-      localStorage.setItem("utilisateur", JSON.stringify(utilisateur));
-      setUser(utilisateur);
-      setToken(token);
-      return { success: true };
-    } catch (error) {
-      return {
-        success: false,
-        message: error.response?.data?.message || "Email ou mot de passe incorrect",
-      };
-    }
-  };
+    const { token, utilisateur } = res.data;
+    localStorage.setItem("accessToken", token);
+    localStorage.setItem("utilisateur", JSON.stringify(utilisateur));
+    setUser(utilisateur);
+    setToken(token);
+    return { success: true };
+  } catch (error) {
+    // ✅ On empêche toute erreur d’aller dans la console
+    const message =
+      error?.response?.data?.message || "Email ou mot de passe incorrect";
+    
+    // ✅ On retourne un résultat contrôlé sans log de console
+    return {
+      success: false,
+      message,
+    };
+  }
+};
+
 
   const Deconnexion = async () => {
     try {

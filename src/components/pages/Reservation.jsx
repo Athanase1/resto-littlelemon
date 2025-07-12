@@ -241,7 +241,8 @@ export default function Reservation() {
                 setValeurs(res.id_reservation);
               }}
               supprimer={() => {
-                supprimer(res.id_reservation._id_reservation);
+                alert(res.id_reservation._id_reservation)
+                /*supprimer(res.id_reservation._id_reservation);*/
               }}
             />
           ))}
