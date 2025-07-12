@@ -41,12 +41,12 @@
 }
 .resbtns{
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
-    justify-content: space-around;
+    justify-content:center;
     width: 100%;
     max-width: 100%;
-    
+    gap: .5rem;
 }
 .resbtns>button+button{
     color: black;
@@ -57,7 +57,7 @@
     color: black;
     background-color: white;
     outline: 1px solid red;
-    border-radius: 10px; 
+    border-radius: 10px;
 }
 
 .header{

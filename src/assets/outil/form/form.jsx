@@ -5,11 +5,11 @@ import "./form.css";
 import { UserContext } from "../../../store/AuthContext";
 import { useNavigate } from "react-router-dom";
 import LoadingScreen from "../../../components/layout/Loading";
-import { validerConnexion, validerForm } from "../../../service/validerInputs";
+import { validerConnexion, validerForm, validerMotDePasse } from "../../../service/validerInputs";
 
 export default function Form({ authen }) {
   const [seConnecte, setSeconnecte] = useState(true);
-  const [loading, setLoading] = useState(false);
+  const [loadingForm, setLoadingForm] = useState(false);
   const [nom, setNom] = useState("");
   const [prenom, setPrenom] = useState("");
   const [email, setEmail] = useState("");
@@ -23,16 +23,25 @@ export default function Form({ authen }) {
 
   const gestionSubmission = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    setLoadingForm(true);
     setError(null);
+    setErrs({});
 
-    const erreurs = seConnecte
-      ? validerConnexion({ email, password })
-      : validerForm({ nom, prenom, email, tel, password });
+    let erreurs = {};
+
+    if (seConnecte) {
+      erreurs = validerConnexion({ email, password });
+    } else {
+      erreurs = validerForm({ nom, prenom, email, tel });
+      if (!validerMotDePasse(password)) {
+        erreurs.password =
+          "Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.";
+      }
+    }
 
     if (Object.keys(erreurs).length > 0) {
       setErrs(erreurs);
-      setLoading(false);
+      setLoadingForm(false);
       return;
     }
 
@@ -62,23 +71,21 @@ export default function Form({ authen }) {
         setError(result?.message || "Erreur inconnue");
       }
     } catch (err) {
-      console.error("Erreur lors de l'envoi :", err);
       setError("Une erreur est survenue, veuillez réessayer.");
     } finally {
-      setLoading(false);
+      setLoadingForm(false);
     }
   };
 
-  if (loading) return <LoadingScreen text="Connexion en cours, patientez..." />;
-
   return (
     <div className="form-container">
-      <>
-        {authen && <h1>Connectez-vous !</h1>}
-        {error && <p className="message-erreur">{error}</p>}
-      </>
+      {authen && <h1>Connectez-vous !</h1>}
+      {error && <p className="message-erreur">{error}</p>}
+
+      {loadingForm && <LoadingScreen text="Connexion en cours, patientez..." />}
+
       <form onSubmit={gestionSubmission}>
-        {!authen && (
+        {(!authen || !seConnecte) && (
           <>
             <Input
               label="Nom"
@@ -101,62 +108,26 @@ export default function Form({ authen }) {
               onChange={(e) => setTel(e.target.value)}
               erreur={errs.tel}
             />
-            <Input
-              label="Email"
-              nom="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              erreur={errs.email}
-            />
           </>
         )}
 
-        {authen && (
-          <>
-            {!seConnecte && (
-              <>
-                <Input
-                  label="Nom"
-                  nom="nom"
-                  value={nom}
-                  onChange={(e) => setNom(e.target.value)}
-                  erreur={errs.nom}
-                />
-                <Input
-                  label="Prénom"
-                  nom="prenom"
-                  value={prenom}
-                  onChange={(e) => setPrenom(e.target.value)}
-                  erreur={errs.prenom}
-                />
-                <Input
-                  label="Numéro"
-                  nom="tel"
-                  value={tel}
-                  onChange={(e) => setTel(e.target.value)}
-                  erreur={errs.tel}
-                />
-              </>
-            )}
-            <Input
-              label="Email"
-              nom="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              erreur={errs.email}
-            />
-            <Input
-              label="Mot de passe"
-              nom="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              erreur={errs.password}
-            />
-          </>
-        )}
+        <Input
+          label="Email"
+          nom="email"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          erreur={errs.email}
+        />
+
+        <Input
+          label="Mot de passe"
+          nom="password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          erreur={errs.password}
+        />
 
         <ButtonPlat
           icon1="bi-person"

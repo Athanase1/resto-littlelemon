@@ -5,15 +5,12 @@ import { useNavigate } from "react-router-dom";
 import UserCard from "../card/userCard";
 import LoadingScreen from "../layout/Loading";
 import "../styles/profile.css";
-import { ReservationContext } from "../../store/ReservationContext";
-import ReservationCarte from "../card/reservationCarte";
-import Form2 from "../../assets/outil/form/form2.jsx";
-import { validerChampModification } from "../../service/validerInputs.js";
+
 
 export default function Profile() {
   const navigate = useNavigate();
   const authCtx = useContext(UserContext);
-  const resContext = useContext(ReservationContext);
+ 
   const [chargement, setChargement] = useState(true);
   const [champs, setChamps] = useState({});
   const [initialChamps, setInitialChamps] = useState(authCtx.user);
@@ -43,18 +40,7 @@ export default function Profile() {
       champs.tel !== initialChamps.tel
     );
   };
-  const trouverRes = async () => {
-    if (authCtx.user) {
-      const res = await resContext.reservations(authCtx.user.tel);
-      if (res.success) {
-        setReservations(res.data);
-        setPas(false);
-      } else {
-        setPas(true);
-        serErr(res.message);
-      }
-    }
-  };
+ 
   const gererChangement = (e) => {
     const nom = e.target.name;
     const valeur = e.target.value;
@@ -63,7 +49,6 @@ export default function Profile() {
   useEffect(() => {
     if (authCtx.user) {
       setChamps(authCtx.user);
-      trouverRes();
     }
     setTimeout(() => setChargement(false), 1000);
   }, [authCtx.token]);

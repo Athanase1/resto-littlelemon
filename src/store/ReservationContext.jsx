@@ -24,7 +24,7 @@ export default function ReserVationProvider({ children }) {
   ) => {
     try {
       const res = await axios.post(
-        "https://project1-backend-2gj1.onrender.com/api/users/reservation",
+        "https://project1-backend-2gj1.onrender.com/api/reservations/reservation",
         { date, nbPersonnes, occasion, heure, nom, prenom, tel, email },
         { withCredentials: true }
       );
@@ -44,7 +44,7 @@ export default function ReserVationProvider({ children }) {
 const modifier = async (id, date, nbPersonnes, occasion, heure) => {
   try {
     const res = await axios.put( // ← put est plus approprié que post ici
-      "https://project1-backend-2gj1.onrender.com/api/users/reservation/modifier",
+      "https://project1-backend-2gj1.onrender.com/api/reservations/reservation/modifier",
       { id, date, nbPersonnes, occasion, heure },
       { withCredentials: true }
     );
@@ -66,7 +66,7 @@ const modifier = async (id, date, nbPersonnes, occasion, heure) => {
  const supprimerReservation = async (id) => {
   try {
     const res = await axios.delete(
-      "https://project1-backend-2gj1.onrender.com/api/users/reservation/suppression",
+      "https://project1-backend-2gj1.onrender.com/api/reservations/reservation/suppression",
       {
         data: { id }, // le corps de la requête DELETE
         withCredentials: true,
@@ -90,7 +90,7 @@ const modifier = async (id, date, nbPersonnes, occasion, heure) => {
 
 const reservations = async (tel) => {
   try {
-    const res = await axios.get("https://project1-backend-2gj1.onrender.com/api/users/reservations", {
+    const res = await axios.get("https://project1-backend-2gj1.onrender.com/api/reservations/reservations", {
       params: { tel },
       withCredentials: true,
     });
