@@ -30,7 +30,9 @@ export default function Header2({ handleClick, click }) {
         <i className="bi bi-person-fill" onClick={() =>{
           navigate("/profile")
         }}></i>
-        {authCtx.user && <h1 className="userName">{authCtx.user.prenom}</h1>}
+        {authCtx.user && <h1 className="userName">{authCtx.user.prenom}<i className="bi bi-person" onClick={() =>{
+          navigate("/profile")
+        }}></i></h1>}
         {!authCtx.user && <><ButtonPlat
           icon1="bi-person"
           text="Se Connecter"

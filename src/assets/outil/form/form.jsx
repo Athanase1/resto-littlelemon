@@ -72,6 +72,7 @@ export default function Form({ authen }) {
       }
     } catch (err) {
       setError("Une erreur est survenue, veuillez réessayer.");
+      alert(err)
     } finally {
       setLoadingForm(false);
     }

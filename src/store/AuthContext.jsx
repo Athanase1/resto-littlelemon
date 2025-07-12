@@ -17,22 +17,36 @@ export default function UserProvider({ children }) {
   const [token, setToken] = useState(null);
   const [chargement, setChargement] = useState(true);
 
+  const Deconnexion = useCallback(async () => {
+    try {
+      await axios.post(
+        "https://project1-backend-2gj1.onrender.com/api/users/logout",
+        null,
+        { withCredentials: true }
+      );
+    } catch {}
+
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("utilisateur");
+    setUser(null);
+    setToken(null);
+  }, []);
+
   const refreshToken = useCallback(async () => {
     try {
       const res = await axios.get(
         "https://project1-backend-2gj1.onrender.com/api/users/refresh",
         { withCredentials: true }
       );
-
       const newToken = res.data.token;
       localStorage.setItem("accessToken", newToken);
       setToken(newToken);
       return newToken;
     } catch {
-      Deconnexion();
+      await Deconnexion();
       return null;
     }
-  }, []);
+  }, [Deconnexion]);
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("utilisateur"));
@@ -42,9 +56,11 @@ export default function UserProvider({ children }) {
       setUser(storedUser);
       setToken(accessToken);
     }
-    setTimeout(() => setChargement(false), 1000);
+
+    setTimeout(() => setChargement(false), 500);
   }, []);
 
+  // ⬅️ Intercepteur requête : ajoute le token
   useEffect(() => {
     const requestInterceptor = axios.interceptors.request.use(
       (config) => {
@@ -61,8 +77,10 @@ export default function UserProvider({ children }) {
       axios.interceptors.request.eject(requestInterceptor);
     };
   }, []);
+
+  // ⬅️ Intercepteur réponse : tente un refresh si 401
   useEffect(() => {
-    const interceptor = axios.interceptors.response.use(
+    const responseInterceptor = axios.interceptors.response.use(
       (response) => response,
       async (error) => {
         const originalRequest = error.config;
@@ -74,22 +92,18 @@ export default function UserProvider({ children }) {
         ) {
           originalRequest._retry = true;
           const newToken = await refreshToken();
-
           if (newToken) {
-            originalRequest.headers["Authorization"] = "Bearer " + newToken;
+            originalRequest.headers["Authorization"] = `Bearer ${newToken}`;
             return axios(originalRequest);
-          } else {
-            // ✅ Empêche affichage d’erreur inutile dans console
-            return new Promise(() => {}); // ← bloque sans rejet
           }
         }
 
-        return Promise.reject(error); // ← pour erreurs normales
+        return Promise.reject(error); // laisse les autres erreurs remonter
       }
     );
 
     return () => {
-      axios.interceptors.response.eject(interceptor);
+      axios.interceptors.response.eject(responseInterceptor);
     };
   }, [refreshToken]);
 
@@ -104,58 +118,45 @@ export default function UserProvider({ children }) {
 
       localStorage.setItem("accessToken", token);
       localStorage.setItem("utilisateur", JSON.stringify(utilisateur));
-
       setUser(utilisateur);
       setToken(token);
 
       return { success: true };
     } catch (error) {
-      const message = error.response?.data?.message || "Information invalide";
+      const message = error?.response?.data?.message || "Information invalide";
       return { success: false, message };
     }
   };
 
- const connexion = async (email, password) => {
-  try {
-    const res = await axios.post(
-      "https://project1-backend-2gj1.onrender.com/api/users/connexion",
-      { email, password },
-      { withCredentials: true }
-    );
-
-    const { token, utilisateur } = res.data;
-    localStorage.setItem("accessToken", token);
-    localStorage.setItem("utilisateur", JSON.stringify(utilisateur));
-    setUser(utilisateur);
-    setToken(token);
-    return { success: true };
-  } catch (error) {
-    // ✅ On empêche toute erreur d’aller dans la console
-    const message =
-      error?.response?.data?.message || "Email ou mot de passe incorrect";
-    
-    // ✅ On retourne un résultat contrôlé sans log de console
-    return {
-      success: false,
-      message,
-    };
-  }
-};
-
-
-  const Deconnexion = async () => {
+  const connexion = async (email, password) => {
     try {
-      await axios.post(
-        "https://project1-backend-2gj1.onrender.com/api/users/logout",
-        null,
-        { withCredentials: true }
+      const res = await axios.post(
+        "https://project1-backend-2gj1.onrender.com/api/users/connexion",
+        { email, password },
+        {
+          withCredentials: true,
+          validateStatus: function (status) {
+            // Empêche axios de "rejeter" la promesse automatiquement
+            return status < 500; // Accepte les 4xx (ex: 401), mais rejette 5xx
+          },
+        }
       );
-    } catch {}
 
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("utilisateur");
-    setUser(null);
-    setToken(null);
+      if (res.status === 200) {
+        const { token, utilisateur } = res.data;
+        localStorage.setItem("accessToken", token);
+        localStorage.setItem("utilisateur", JSON.stringify(utilisateur));
+        setUser(utilisateur);
+        setToken(token);
+        return { success: true };
+      } else {
+        const message = res.data?.message || "Email ou mot de passe incorrect";
+        return { success: false, message };
+      }
+    } catch (error) {
+      // Ici seules les erreurs réseau/serveur (ex: 500) arrivent
+      return { success: false, message: "Erreur du serveur" };
+    }
   };
 
   const value = {
