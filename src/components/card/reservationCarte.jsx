@@ -5,12 +5,27 @@ export default function ReservationCarte({
   supprimer,
   modifier,
 }) {
+ function reservationEstExpiree() {
+  const [year, month, day] = details.date.split("-");
+  const [hour, minute] = details.heure.split(":");
+  const dateHeure = new Date(
+    Number(year),
+    Number(month) - 1,
+    Number(day),
+    Number(hour),
+    Number(minute)
+  );
+  return dateHeure < new Date();
+}
+
+
   return (
-    <div className="reserve-container">
+    <div className={reservationEstExpiree ? "expire reserve-container" : "reserve-container"}>
       <div className="header">
         <h1>Date:</h1>
         <h1 id="date">{details.date}</h1>
       </div>
+      {reservationEstExpiree && <p id="exp">expirée</p>}
       <div className="details">
         <div className="detail">
           <i className="bi bi-people-fill"></i>
@@ -27,11 +42,11 @@ export default function ReservationCarte({
       </div>
       <div className="resbtns">
         <ButtonPlat icon2="bi-trash" text="Supprimer" onClick={supprimer} />
-        <ButtonPlat
+       {!reservationEstExpiree &&  <ButtonPlat
           icon2="bi-pencil-square"
           text="Modifier"
           onClick={modifier}
-        />
+        />}
       </div>
     </div>
   );

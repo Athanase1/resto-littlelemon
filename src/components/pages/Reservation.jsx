@@ -53,35 +53,73 @@ export default function Reservation() {
   const [text, setText] = useState("");
   const [demandeModif, setDemande] = useState(false);
   const [res, setRes] = useState([]);
-
   const trouver = async () => {
-    const err = validerTelephone(valR);
-    if (err) {
-      setErr(err);
-      return;
-    }
-    const result = resContext.reservations(valR);
-    if (result.data != null || result.data.length > 0) {
-      setRes(result.data);
+    setChargement(true);
+    setText(""); // Réinitialise le texte d'erreur précédent
+    setErr(null); // Réinitialise erreur input (si tu en utilises)
+
+    try {
+      const result = await resContext.reservations(valR.trim());
+
+      if (result.success && result.data.length > 0) {
+        setRes(result.data);
+        localStorage.setItem("res", JSON.stringify(result.data)); // ✅ serialize avant stockage
+      } else {
+        setRes([]); // vide le tableau si rien
+        setText("Aucune réservation associée à ce numéro");
+        localStorage.removeItem("res"); // nettoie localStorage si aucune donnée
+      }
+    } catch (e) {
+      console.error("Erreur de recherche :", e);
+      setText("Erreur lors de la recherche.");
+    } finally {
+      setTimeout(() => setChargement(false), 1000);
     }
   };
+
+  function chercherRes() {
+    const res = localStorage.getItem("res");
+
+    if (!res) return;
+
+    try {
+      const donnees = JSON.parse(res);
+
+      // On vérifie que c’est bien un tableau (sécurité)
+      if (Array.isArray(donnees)) {
+        setRes(donnees);
+      } else {
+        console.warn(
+          "Le format de la réservation dans le localStorage est invalide."
+        );
+        localStorage.removeItem("res"); // on nettoie
+      }
+    } catch (e) {
+      console.error("Erreur lors du parsing des données stockées :", e);
+      localStorage.removeItem("res"); // données corrompues → suppression
+    }
+  }
 
   /*charger reservation automatiquement */
   useEffect(() => {
     setChargement(true);
     trouverRes();
+    chercherRes();
     setTimeout(() => setChargement(false), 1000);
   }, []);
+
   const trouverRes = async () => {
     if (authCtx.user) {
       const res = await resContext.reservations(authCtx.user.tel);
       if (res.success) {
         setRes(res.data);
+        setValR("");
       } else {
         setText("Aucun reservations pour le moment");
       }
     }
   };
+
   const modifier = async () => {
     const erreurs = validerChampModification(
       valeurs.date,
@@ -214,14 +252,29 @@ export default function Reservation() {
     const valeur = e.target.value;
     setChamps((champs) => ({ ...champs, [nom]: valeur }));
   };
-  const supprimer = async (id) => {
-    const res = await resContext.supprimerReservation(id);
-    if (res.success) {
-      alert("reservation supprimée avec succèss");
-    } else {
-      alert("Erreur" + res.message);
-    }
-  };
+ const supprimer = async (id) => {
+  const res = await resContext.supprimerReservation(id);
+
+  if (res.success) {
+    // 🔥 Supprimer les données du localStorage liées aux réservations
+    const anciennes = JSON.parse(localStorage.getItem("res")) || [];
+
+    // 🔥 Filtrer pour ne garder que les réservations qui ne sont PAS supprimées
+    const misesAJour = anciennes.filter(
+      (r) => r.id_reservation !== id
+    );
+
+    localStorage.setItem("res", JSON.stringify(misesAJour));
+
+    // 🔄 Met à jour l’état local aussi si nécessaire
+    setRes(misesAJour);
+
+    alert("Réservation supprimée avec succès !");
+  } else {
+    alert("Erreur : " + res.message);
+  }
+};
+
   if (chargement)
     return <LoadingScreen text="Récupération des informations..." />;
 
@@ -230,7 +283,13 @@ export default function Reservation() {
       <div className="zoneRecherche">
         <div className="searc-input">
           <Input value={valR} onChange={handleChangement} erreur={err} />
-          <ButtonPlat icon2="bi-search" text="Trouver" onClick={trouver} />
+          <ButtonPlat
+            icon2="bi-search"
+            text="Trouver"
+            onClick={() => {
+              trouver();
+            }}
+          />
         </div>
         <div className="reserves">
           {res.map((res) => (
@@ -241,8 +300,9 @@ export default function Reservation() {
                 setValeurs(res.id_reservation);
               }}
               supprimer={() => {
-                alert(res.id_reservation._id_reservation)
-                /*supprimer(res.id_reservation._id_reservation);*/
+                console.log(res._id);
+                
+                supprimer(res.id_reservation);
               }}
             />
           ))}

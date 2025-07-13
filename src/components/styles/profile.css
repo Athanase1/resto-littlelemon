@@ -104,10 +104,4 @@ html, body {
   .head i {
     font-size: 1.5rem;
   }
-
-  .reserves {
-    flex-direction: column;
-    align-items: stretch;
-    overflow-x: hidden;
-  }
 }

@@ -6,11 +6,11 @@ import master from "../../assets/images/master.jpg";
 import Paypal from "../../assets/images/paypal.png";
 
 export default function Footer() {
-  const [showLinks, setShowLinks] = useState(false);
-  const [showPayments, setShowPayments] = useState(false);
+  const [afficheliens, setAfficheliens] = useState(false);
+  const [affichePaiements, setAffichesPaiements] = useState(false);
 
-  const toggleLinks = () => setShowLinks(!showLinks);
-  const togglePayments = () => setShowPayments(!showPayments);
+  const afficheLiens = () => setAfficheliens(!afficheliens);
+  const affichepaiements = () => setAffichesPaiements(!affichePaiements);
 
   const currentYear = new Date().getFullYear();
   const navigate = useNavigate();
@@ -19,14 +19,16 @@ export default function Footer() {
     <footer>
       <div className="d-flex">
         <nav>
-          <div className="linkshead">
+          <div className="linkshead" onClick={() =>{
+            afficheLiens()
+          }}>
             <h1 className="link-title">Liens importants</h1>
             <i
-              className={showLinks ? "bi bi-chevron-up" : "bi bi-chevron-down"}
-              onClick={toggleLinks}
+              className={afficheliens ? "bi bi-chevron-up" : "bi bi-chevron-down"}
+              onClick={afficheLiens}
             ></i>
           </div>
-          <ul className={showLinks ? "footer-ul" : "link-cacher"}>
+          <ul className={afficheliens ? "footer-ul" : "link-cacher"}>
             <li>
               <Link to="/">Home</Link>
             </li>
@@ -46,16 +48,18 @@ export default function Footer() {
         </nav>
 
         <nav>
-          <div className="linkshead">
+          <div className="linkshead" onClick={() =>{
+            affichepaiements()
+          }}>
             <h1 className="link-title">Modes de paiement acceptés</h1>
             <i
               className={
-                showPayments ? "bi bi-chevron-up" : "bi bi-chevron-down"
+                affichePaiements ? "bi bi-chevron-up" : "bi bi-chevron-down"
               }
-              onClick={togglePayments}
+              onClick={affichepaiements}
             ></i>
           </div>
-          <ul className={showPayments ? "footer-ul spc" : "link-cacher"}>
+          <ul className={affichePaiements ? "footer-ul spc" : "link-cacher"}>
             <li>
               <img src={master} alt="master card logo" className="logos" />
             </li>

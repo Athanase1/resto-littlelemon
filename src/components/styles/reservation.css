@@ -173,7 +173,9 @@
   box-sizing: border-box;
   gap: 1rem;
   flex-wrap: nowrap;
-  height: fit-content;
+  height: fit-content !important;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .zoneForm {
@@ -207,9 +209,7 @@
     overflow-y: auto;
   }
   
-  .reserves {
   
-  }
 
   .res-container form {
     width: 100%;

@@ -34,6 +34,7 @@
     text-decoration: wavy;
     font-style: oblique;
     font-size: .8rem;
+    color: black !important;
 }
 .detail i{
     font-size: 2rem;
@@ -47,6 +48,9 @@
     width: 100%;
     max-width: 100%;
     gap: .5rem;
+}
+.expire{
+    background-color: gray;
 }
 .resbtns>button+button{
     color: black;
@@ -69,4 +73,10 @@
 #date{
     font-weight: bold;
     font-size: 1.5rem;
+    color: black;
+}
+#exp{
+    color: red;
+    font-size: 2rem;
+    text-decoration: line-through;
 }
