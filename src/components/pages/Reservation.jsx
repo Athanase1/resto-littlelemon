@@ -17,6 +17,7 @@ import ConfirmationCarte from "../card/ConfirmationCarte";
 import { UserContext } from "../../store/AuthContext";
 import { ReservationContext } from "../../store/ReservationContext";
 import {
+  estReservationValide,
   validerChampModification,
   validerChampsReservation,
   validerTelephone,
@@ -53,21 +54,32 @@ export default function Reservation() {
   const [text, setText] = useState("");
   const [demandeModif, setDemande] = useState(false);
   const [res, setRes] = useState([]);
+
   const trouver = async () => {
     setChargement(true);
-    setText(""); // Réinitialise le texte d'erreur précédent
-    setErr(null); // Réinitialise erreur input (si tu en utilises)
-
+    setText("");
+    setErr(null);
     try {
+      console.log("Recherche avec le numéro :", valR.trim());
+
       const result = await resContext.reservations(valR.trim());
 
+      
+
       if (result.success && result.data.length > 0) {
-        setRes(result.data);
-        localStorage.setItem("res", JSON.stringify(result.data)); // ✅ serialize avant stockage
+        const nonExpirees = result.data.filter(estReservationValide);
+       
+
+        if (nonExpirees.length === 0) {
+          setText("Aucune réservation à venir pour ce numéro de tel.");
+          setRes([]);
+        } else {
+          setRes(nonExpirees);
+          localStorage.setItem("res", JSON.stringify(nonExpirees));
+          localStorage.setItem("tel", valR.toString());
+        }
       } else {
-        setRes([]); // vide le tableau si rien
         setText("Aucune réservation associée à ce numéro");
-        localStorage.removeItem("res"); // nettoie localStorage si aucune donnée
       }
     } catch (e) {
       console.error("Erreur de recherche :", e);
@@ -79,41 +91,33 @@ export default function Reservation() {
 
   function chercherRes() {
     const res = localStorage.getItem("res");
-
-    if (!res) return;
-
-    try {
-      const donnees = JSON.parse(res);
-
-      // On vérifie que c’est bien un tableau (sécurité)
-      if (Array.isArray(donnees)) {
-        setRes(donnees);
-      } else {
-        console.warn(
-          "Le format de la réservation dans le localStorage est invalide."
-        );
-        localStorage.removeItem("res"); // on nettoie
+    if (res) {
+      try {
+        const donnees = JSON.parse(res);
+        const valides = donnees.filter(estReservationValide);
+        setRes(valides);
+      } catch (e) {
+        console.error("Erreur lors du parsing des données stockées :", e);
       }
-    } catch (e) {
-      console.error("Erreur lors du parsing des données stockées :", e);
-      localStorage.removeItem("res"); // données corrompues → suppression
+    } else {
+      setText("Rechercher une reservationavec votre numéro");
+    }
+  }
+  /* function pour chercher un num de tel */
+  function trouverTel() {
+    const tel = localStorage.getItem("tel");
+    if (tel) {
+      setValR(tel);
     }
   }
 
-  /*charger reservation automatiquement */
-  useEffect(() => {
-    setChargement(true);
-    trouverRes();
-    chercherRes();
-    setTimeout(() => setChargement(false), 1000);
-  }, []);
-
   const trouverRes = async () => {
-    if (authCtx.user) {
+    if (!authCtx.user) {
+      return;
+    } else if (authCtx.user) {
       const res = await resContext.reservations(authCtx.user.tel);
       if (res.success) {
         setRes(res.data);
-        setValR("");
       } else {
         setText("Aucun reservations pour le moment");
       }
@@ -252,28 +256,34 @@ export default function Reservation() {
     const valeur = e.target.value;
     setChamps((champs) => ({ ...champs, [nom]: valeur }));
   };
- const supprimer = async (id) => {
-  const res = await resContext.supprimerReservation(id);
+  const supprimer = async (id) => {
+    const res = await resContext.supprimerReservation(id);
 
-  if (res.success) {
-    // 🔥 Supprimer les données du localStorage liées aux réservations
-    const anciennes = JSON.parse(localStorage.getItem("res")) || [];
+    if (res.success) {
+      // 🔥 Supprimer les données du localStorage liées aux réservations
+      const anciennes = JSON.parse(localStorage.getItem("res")) || [];
 
-    // 🔥 Filtrer pour ne garder que les réservations qui ne sont PAS supprimées
-    const misesAJour = anciennes.filter(
-      (r) => r.id_reservation !== id
-    );
+      // 🔥 Filtrer pour ne garder que les réservations qui ne sont PAS supprimées
+      const misesAJour = anciennes.filter((r) => r.id_reservation !== id);
 
-    localStorage.setItem("res", JSON.stringify(misesAJour));
+      localStorage.setItem("res", JSON.stringify(misesAJour));
 
-    // 🔄 Met à jour l’état local aussi si nécessaire
-    setRes(misesAJour);
+      // 🔄 Met à jour l’état local aussi si nécessaire
+      setRes(misesAJour);
 
-    alert("Réservation supprimée avec succès !");
-  } else {
-    alert("Erreur : " + res.message);
-  }
-};
+      alert("Réservation supprimée avec succès !");
+    } else {
+      alert("Erreur : " + res.message);
+    }
+  };
+  /*charger reservation automatiquement */
+  useEffect(() => {
+    setChargement(true);
+    trouverTel();
+    chercherRes();
+    trouverRes();
+    setTimeout(() => setChargement(false), 1000);
+  }, []); // ✅ s’exécute une seule fois au chargement
 
   if (chargement)
     return <LoadingScreen text="Récupération des informations..." />;
@@ -292,6 +302,7 @@ export default function Reservation() {
           />
         </div>
         <div className="reserves">
+          {text && <p>{text}</p>}
           {res.map((res) => (
             <ReservationCarte
               details={res.id_reservation}
@@ -300,9 +311,10 @@ export default function Reservation() {
                 setValeurs(res.id_reservation);
               }}
               supprimer={() => {
-                console.log(res._id);
-                
                 supprimer(res.id_reservation);
+                trouverTel();
+                trouverRes();
+                chercherRes();
               }}
             />
           ))}

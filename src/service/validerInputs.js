@@ -157,5 +157,21 @@ export function validerChampModification(date, nbPersonnes, occ,heure){
   }
   return erreurs;
 }
+export function estReservationValide(reservation) {
+  const maintenant = new Date();
+
+  const date = reservation.id_reservation.date; // Ex: "2025-07-13"
+  const heure = reservation.id_reservation.heure; // Ex: "19:00"
+
+  const [h, m] = heure.split(":").map(Number);
+
+  // Crée une date locale correcte en combinant date + heure
+  const dateHeureComplete = new Date(`${date}T${heure}:00`);
+
+  // Vérifie si cette date est dans le futur
+  return dateHeureComplete.getTime() >= maintenant.getTime();
+}
+
+
 
 

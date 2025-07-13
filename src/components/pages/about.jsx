@@ -12,8 +12,10 @@ export default function About() {
   }
   return (
     <div className="AboutContainer">
-      <div className="sub-conatainer">
-        <div className="apropos">
+      <div className="sub-container">
+        <div className="apropos" onClick={() =>{
+          handleClick()
+        }}>
           <div className="abouthead">
             <h1>À propos</h1>
             <i

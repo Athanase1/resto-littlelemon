@@ -35,7 +35,7 @@
   margin: 1rem;
   text-align: justify;
   font-family: "Markazi Text", serif;
-  font-size: 1rem;
+  font-size: 0.95rem;
   line-height: 1.5;
 }
 
@@ -69,14 +69,14 @@
 .Title {
   font-family: "Markazi Text", serif;
   color: black;
-  font-size: 2rem;
+  font-size: 1.5rem;
   display: none;
   margin: 1rem;
 }
 
 .title {
   color: white;
-  font-size: 2rem;
+  font-size: .95rem;
   font-family: "Markazi Text", serif;
 }
 
@@ -157,6 +157,7 @@
 
   .apropos p {
     width: 100%;
+    
   }
 
   .sub-container {
@@ -180,7 +181,6 @@
   }
 
   .detail-card p {
-    font-size: 16px;
     padding: 5px;
     font-family: system-ui, sans-serif;
   }
@@ -199,9 +199,9 @@
 
   .apropos p {
     width: 90%;
-    font-size: 3vw;
+    font-size: .95rem;
     font-family: system-ui, sans-serif;
-    text-align: left;
+    text-align: justify;
     max-height: 3em;
     overflow: hidden;
     display: -webkit-box;
