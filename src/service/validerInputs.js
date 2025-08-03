@@ -96,31 +96,40 @@ export function validerChampsReservation(champs, date,nbPersonnes, occ,heure) {
 
   return erreurs;
 }
-export function validerForm(nom, prenom, tel,email,password){
- const  erreurs = {}
- if (!nom || nom.trim().length < 2) {
+export function validerForm(nom, prenom, tel, email, password) {
+  const erreurs = {};
+
+  nom = typeof nom === "string" ? nom.trim() : "";
+  prenom = typeof prenom === "string" ? prenom.trim() : "";
+  email = typeof email === "string" ? email.trim() : "";
+  tel = typeof tel === "string" ? tel.trim() : "";
+  password = typeof password === "string" ? password : "";
+
+  if (nom.length < 2) {
     erreurs.nom = "Le nom est obligatoire (min. 2 caractères)";
   }
-   if (!prenom || prenom.trim().length < 2) {
+  if (prenom.length < 2) {
     erreurs.prenom = "Le prénom est obligatoire (min. 2 caractères)";
   }
-   if (!tel) {
+  if (!tel) {
     erreurs.tel = "Le numéro de téléphone est obligatoire";
   } else if (!validerTelephone(tel)) {
     erreurs.tel = "Numéro de téléphone invalide";
   }
-    if (!email) {
+  if (!email) {
     erreurs.email = "L'email est obligatoire";
   } else if (!validerEmail(email)) {
     erreurs.email = "Format d'email invalide";
   }
-    if(!password){
-    erreurs.password = "Champ obligatoire"
-  } else if(!validerMotDePasse(password)){
-    erreurs.password = "Mot de passe Invalide"
+  if (!password) {
+    erreurs.password = "Champ obligatoire";
+  } else if (!validerMotDePasse(password)) {
+    erreurs.password = "Mot de passe invalide";
   }
+
   return erreurs;
 }
+
 export function validerConnexion(champs){
   const erreurs = {}
   if(!champs.password){
