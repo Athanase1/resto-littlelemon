@@ -145,11 +145,12 @@ a:hover {
 }
 
 .copydiv {
-  width: 98%;
+  width: 100%;
   height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: white;
 }
 .copydiv img {
   height: 30px;
@@ -183,9 +184,6 @@ a:hover {
   header {
     flex-direction: column;
     height: fit-content;
-  }
-  footer{
-    background-color: white;
   }
 
   #logo {

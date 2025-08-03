@@ -21,11 +21,11 @@
     padding: 1rem;
 }
 .en-tete h1{
-    font-size: 1vw;
+    font-size: .95rem;
     color: white;
 }
 .en-tete h1 +h1{
-    font-size: 1vw;
+    font-size: 2rem;
     font-weight: bold;
     text-decoration: underline;
     color: white;
@@ -49,7 +49,7 @@
     flex-direction: column;
 }
 .item .bi{
-    font-size: 1vw;
+    font-size: 1rem;
     color: white;
 }
 .item h1{
@@ -62,12 +62,10 @@
     color: black;
 }
 .item h1{
-    font-size: 2vw;
+    
     color: black;
 }
-.Confirmation{
-    background-color: white;
-}
+
 .en-tete h1{
     font-size: 1.5rem;
     color: black !important;

@@ -32,11 +32,7 @@ export default function Form({ authen }) {
     if (seConnecte) {
       erreurs = validerConnexion({ email, password });
     } else {
-      erreurs = validerForm({ nom, prenom, email, tel });
-      if (!validerMotDePasse(password)) {
-        erreurs.password =
-          "Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.";
-      }
+      erreurs = validerForm({ nom, prenom, email, tel,password });
     }
 
     if (Object.keys(erreurs).length > 0) {

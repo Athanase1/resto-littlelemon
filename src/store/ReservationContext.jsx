@@ -1,6 +1,5 @@
 import { createContext, useState } from "react";
 import axios from "axios";
-
 export const ReservationContext = createContext({
   reserver: () => {},
   reservations: () => {},

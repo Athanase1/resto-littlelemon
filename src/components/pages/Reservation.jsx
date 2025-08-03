@@ -44,6 +44,7 @@ export default function Reservation() {
   const [nbPersonnes, setPersonnes] = useState("8");
   const [occasion, setOccasion] = useState("Anniversaire");
   const [heure, setHeure] = useState("19:00");
+  const [id, setId] = useState("");
   const [confirmation, setConfirmation] = useState(false);
   const [messageConfirmation, setMessage] = useState("");
   const [errs, setErrs] = useState([]);
@@ -55,31 +56,30 @@ export default function Reservation() {
   const [demandeModif, setDemande] = useState(false);
   const [res, setRes] = useState([]);
 
-  const trouver = async () => {
+  const trouver = async (num = valR) => {
+    const numero = num.trim();
+    if (!numero) return;
+
     setChargement(true);
     setText("");
     setErr(null);
+
     try {
-      console.log("Recherche avec le numéro :", valR.trim());
-
-      const result = await resContext.reservations(valR.trim());
-
-      
+      const result = await resContext.reservations(numero);
 
       if (result.success && result.data.length > 0) {
         const nonExpirees = result.data.filter(estReservationValide);
-       
 
         if (nonExpirees.length === 0) {
-          setText("Aucune réservation à venir pour ce numéro de tel.");
+          setText("Aucune réservation à venir pour ce numéro.");
           setRes([]);
         } else {
           setRes(nonExpirees);
-          localStorage.setItem("res", JSON.stringify(nonExpirees));
-          localStorage.setItem("tel", valR.toString());
+          localStorage.setItem("tel", numero); // On stocke uniquement le numéro
         }
       } else {
-        setText("Aucune réservation associée à ce numéro");
+        setText("Aucune réservation associée à ce numéro.");
+        setRes([]);
       }
     } catch (e) {
       console.error("Erreur de recherche :", e);
@@ -90,19 +90,15 @@ export default function Reservation() {
   };
 
   function chercherRes() {
-    const res = localStorage.getItem("res");
-    if (res) {
-      try {
-        const donnees = JSON.parse(res);
-        const valides = donnees.filter(estReservationValide);
-        setRes(valides);
-      } catch (e) {
-        console.error("Erreur lors du parsing des données stockées :", e);
-      }
+    const tel = localStorage.getItem("tel");
+    if (tel) {
+      setValR(tel);
+      trouver(tel); // on utilise la version modifiée de `trouver()` juste en dessous
     } else {
-      setText("Rechercher une reservationavec votre numéro");
+      setText("Recherchez une réservation avec votre numéro.");
     }
   }
+
   /* function pour chercher un num de tel */
   function trouverTel() {
     const tel = localStorage.getItem("tel");
@@ -260,31 +256,19 @@ export default function Reservation() {
     const res = await resContext.supprimerReservation(id);
 
     if (res.success) {
-      // 🔥 Supprimer les données du localStorage liées aux réservations
-      const anciennes = JSON.parse(localStorage.getItem("res")) || [];
-
-      // 🔥 Filtrer pour ne garder que les réservations qui ne sont PAS supprimées
-      const misesAJour = anciennes.filter((r) => r.id_reservation !== id);
-
-      localStorage.setItem("res", JSON.stringify(misesAJour));
-
-      // 🔄 Met à jour l’état local aussi si nécessaire
-      setRes(misesAJour);
-
       alert("Réservation supprimée avec succès !");
+      await trouver(); // Recharge les réservations à jour
     } else {
       alert("Erreur : " + res.message);
     }
   };
+
   /*charger reservation automatiquement */
   useEffect(() => {
     setChargement(true);
-    trouverTel();
-    chercherRes();
-    trouverRes();
+    chercherRes(); // ← lance automatiquement la recherche avec le numéro stocké
     setTimeout(() => setChargement(false), 1000);
-  }, []); // ✅ s’exécute une seule fois au chargement
-
+  }, []); // ← tableau vide pour n’exécuter qu’une fois au chargement
   if (chargement)
     return <LoadingScreen text="Récupération des informations..." />;
 
@@ -309,6 +293,7 @@ export default function Reservation() {
               modifier={() => {
                 setDemande(true);
                 setValeurs(res.id_reservation);
+                setId(res.id_reservation);
               }}
               supprimer={() => {
                 supprimer(res.id_reservation);

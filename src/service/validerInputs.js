@@ -96,27 +96,27 @@ export function validerChampsReservation(champs, date,nbPersonnes, occ,heure) {
 
   return erreurs;
 }
-export function validerForm(champs){
+export function validerForm(nom, prenom, tel,email,password){
  const  erreurs = {}
- if (!champs.nom || champs.nom.trim().length < 2) {
+ if (!nom || nom.trim().length < 2) {
     erreurs.nom = "Le nom est obligatoire (min. 2 caractères)";
   }
-   if (!champs.prenom || champs.prenom.trim().length < 2) {
+   if (!prenom || prenom.trim().length < 2) {
     erreurs.prenom = "Le prénom est obligatoire (min. 2 caractères)";
   }
-   if (!champs.tel) {
+   if (!tel) {
     erreurs.tel = "Le numéro de téléphone est obligatoire";
-  } else if (!validerTelephone(champs.tel)) {
+  } else if (!validerTelephone(tel)) {
     erreurs.tel = "Numéro de téléphone invalide";
   }
-    if (!champs.email) {
+    if (!email) {
     erreurs.email = "L'email est obligatoire";
-  } else if (!validerEmail(champs.email)) {
+  } else if (!validerEmail(email)) {
     erreurs.email = "Format d'email invalide";
   }
-    if(!champs.password){
+    if(!password){
     erreurs.password = "Champ obligatoire"
-  } else if(!validerMotDePasse(champs.password)){
+  } else if(!validerMotDePasse(password)){
     erreurs.password = "Mot de passe Invalide"
   }
   return erreurs;

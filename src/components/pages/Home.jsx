@@ -10,24 +10,23 @@ import TermsCard from "../card/terme/terme";
 export default function Home() {
   const navigate = useNavigate();
   const authCtx = useContext(UserContext);
+  
  const [showTerms, setShowTerms] = useState(() => {
-  // Cette fonction sera appelée au premier rendu
   return !localStorage.getItem("acceptedTerms");
 });
-
 
   useEffect(() => {
     const accepted = localStorage.getItem("acceptedTerms");
     if (!accepted) {
       setShowTerms(true);
-      document.body.style.overflow = "hidden"; // 🔒 Empêche le scroll
+      document.body.style.overflow = "hidden"; 
     }
   }, []);
 
   const handleAccept = () => {
     localStorage.setItem("acceptedTerms", "true");
     setShowTerms(false);
-    document.body.style.overflow = "auto"; // ✅ Réactive le scroll
+    document.body.style.overflow = "auto"; 
     alert("Rassurez vous ce site à pour but de démontrer mes compétences rien d'autre!")
   };
   return (
@@ -59,10 +58,10 @@ export default function Home() {
       {authCtx.user && <h1> Bienvenue {authCtx.user.prenom} !</h1>}
       <div className="conteneur2">
         <div className="head">
-          <h1 className="subtitle">This weeks specials!</h1>
+          <h1 className="subtitle">Les plus populaires!</h1>
           <div className="btn">
             <ButtonPlat
-              text="Commandez en ligne"
+              text="Notre menu"
               icon2="bi-arrow-right"
               onClick={() => {
                 navigate("/menu");
