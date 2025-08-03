@@ -32,7 +32,7 @@ export default function Form({ authen }) {
     if (seConnecte) {
       erreurs = validerConnexion({ email, password });
     } else {
-      erreurs = validerForm({ nom, prenom, tel, email, password });
+      erreurs = validerForm(nom, prenom, tel, email, password);
     }
 
     if (Object.keys(erreurs).length > 0) {
