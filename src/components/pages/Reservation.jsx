@@ -1,11 +1,12 @@
 import ButtonPlat from "../../assets/outil/buttons/buttonflat";
 import FormGroupe from "../../assets/outil/form-Input/input-groupe";
 import {
-  date,
+  
   Personnes,
   occasions,
-  heuresDisponible,
   dateFormatee,
+  getHeuresDisponible,
+  dateDisponible,
 } from "../../service/DatesetPersonnes";
 import Input from "../../assets/outil/input/input";
 import "../styles/reservation.css";
@@ -20,7 +21,7 @@ import {
   estReservationValide,
   validerChampModification,
   validerChampsReservation,
-  validerTelephone,
+ 
 } from "../../service/validerInputs";
 import Confirmation from "../../assets/outil/confirmation/confirmation";
 import { useNavigate } from "react-router-dom";
@@ -29,6 +30,7 @@ import Form2 from "../../assets/outil/form/form2";
 import LoadingScreen from "../layout/Loading";
 
 export default function Reservation() {
+  
   const authCtx = useContext(UserContext);
   const resContext = useContext(ReservationContext);
   const navigate = useNavigate();
@@ -41,9 +43,10 @@ export default function Reservation() {
   });
 
   const [dat, setDate] = useState(dateFormatee);
+  const heures = getHeuresDisponible(dat);
   const [nbPersonnes, setPersonnes] = useState("8");
   const [occasion, setOccasion] = useState("Anniversaire");
-  const [heure, setHeure] = useState("19:00");
+  const [heure, setHeure] = useState(heures[0]);
   const [id, setId] = useState("");
   const [confirmation, setConfirmation] = useState(false);
   const [messageConfirmation, setMessage] = useState("");
@@ -181,11 +184,12 @@ export default function Reservation() {
   );
 
   if (authCtx.user != null) {
-    champs.nom = authCtx.user.nom;
-    champs.prenom = authCtx.user.prenom;
-    champs.tel = authCtx.user.tel;
-    champs.email = authCtx.user.email;
+    champs.nom = authCtx.user.nom && authCtx.user.nom;
+    champs.prenom = authCtx.user.prenom && authCtx.user.prenom;
+    champs.tel = authCtx.user.tel && authCtx.user.tel;
+    champs.email = authCtx.user.email &&  authCtx.user.email;
   }
+  
 
   const reserverTable = async () => {
     setChargement(true);
@@ -318,11 +322,11 @@ export default function Reservation() {
                   label="Date"
                   icon="bi bi-calendar"
                   name="date"
-                  data={date}
+                  data={dateDisponible}
                   valueConfimer={!!dat}
                   erreur={errs.date}
                 />
-                {date && date.length > 0 && (
+                { dateDisponible.length > 0 && (
                   <div className={estClic.date ? "liste" : "cacherListe"}>
                     <i
                       className="bi bi-x"
@@ -330,7 +334,7 @@ export default function Reservation() {
                         setEstClic(!estClic);
                       }}
                     ></i>
-                    {date.map((d, key) => (
+                    {dateDisponible.map((d, key) => (
                       <li key={key} onClick={() => gererChoix("date", d.value)}>
                         {d.label}
                       </li>
@@ -415,7 +419,7 @@ export default function Reservation() {
                   valueConfimer={!!heure}
                   erreur={errs.heure}
                 />
-                {heuresDisponible && heuresDisponible.length > 0 && (
+                {heures.length > 0 && (
                   <div className={estClic.heure ? "liste" : "cacherListe"}>
                     <i
                       className="bi bi-x"
@@ -423,7 +427,7 @@ export default function Reservation() {
                         setEstClic(!estClic);
                       }}
                     ></i>
-                    {heuresDisponible.map((item, index) => (
+                    {heures.map((item, index) => (
                       <li key={index} onClick={() => gererChoix("heure", item)}>
                         {item}
                       </li>
@@ -481,6 +485,7 @@ export default function Reservation() {
           nom={champs.nom}
           prenom={champs.prenom}
           tel={champs.tel}
+          
           details={{
             date: dat,
             nbPersonnes: nbPersonnes,

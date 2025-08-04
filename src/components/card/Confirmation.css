@@ -11,6 +11,7 @@
 }
 .buttons{
     display: flex;
+    width: 100%;
 }
 .en-tete{
     display: flex;
@@ -57,12 +58,15 @@
     color: white;
 }
 @media screen and (max-width:768px) {
+    .Confirmation{
+        background-color: white;
+    }
     .item .bi{
     font-size: 4rem;
     color: black;
 }
 .item h1{
-    
+    font-size: 16px;
     color: black;
 }
 
