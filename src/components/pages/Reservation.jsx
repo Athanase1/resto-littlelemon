@@ -42,7 +42,7 @@ export default function Reservation() {
     email: "exemple@gmail.com",
   });
 
-  const [dat, setDate] = useState(dateFormatee);
+  const [dat, setDate] = useState(dateDisponible[0].value);
   const heures = getHeuresDisponible(dat);
   const [nbPersonnes, setPersonnes] = useState("8");
   const [occasion, setOccasion] = useState("Anniversaire");
