@@ -37,9 +37,15 @@ export const occasions = [
 
 export const dateDisponible = [];
 
+const now = new Date();
+const currentHour = now.getHours();
+
 for (let i = 0; i < 7; i++) {
   const d = new Date();
   d.setDate(d.getDate() + i);
+
+  // ⚠️ Si on est aujourd’hui et qu’il est 21h ou plus, on saute
+  if (i === 0 && currentHour >= 21) continue;
 
   const year = d.getFullYear();
   const month = String(d.getMonth() + 1).padStart(2, "0");
@@ -59,6 +65,7 @@ for (let i = 0; i < 7; i++) {
     label: affichage.charAt(0).toUpperCase() + affichage.slice(1),
   });
 }
+
 
 // Date d’aujourd’hui formatée
 const aujourdHui = new Date();
